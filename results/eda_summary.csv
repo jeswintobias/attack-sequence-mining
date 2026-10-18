@@ -1,0 +1,11 @@
+metric,value
+total_raw_rows,1048575.0
+singleton_rows,757291.0
+singleton_percentage,72.22
+rows_length_2_to_3,283503.0
+rows_length_ge_4,7781.0
+unique_sequences_ge_4,2907.0
+rows_with_internal_repeats,278.0
+out_of_range_date_rows,14.0
+unique_techniques_uncollapsed,378.0
+unique_techniques_collapsed,185.0
