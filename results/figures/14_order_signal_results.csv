@@ -1,0 +1,2 @@
+real_mean_asymmetry,n_qualifying_pairs,shuffled_mean,shuffled_p2.5,shuffled_p97.5,n_shuffled_ge_real,p_value,n_shuffles
+0.619923,140,0.092925,0.081244,0.104472,0,0.004975,200
