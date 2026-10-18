@@ -1,0 +1,4 @@
+set,unique_sequences,dup_weighted_sequences,total_examples,dup_weighted_examples,bucket_4,bucket_5,bucket_6,bucket_7+
+train,1633,4291,8329,17786,281,237,222,893
+val,545,1676,2776,7398,94,79,74,298
+test,543,1570,2832,7099,93,79,74,297
