@@ -1,0 +1,5 @@
+model,unseen_context_handling
+B1_Majority,"Always predicts the single most frequent train label, context-independent."
+B2_UnigramPrior,"Always predicts from singleton global prior, context-independent."
+B3_Markov1_k0.001,"If last technique not seen in train bigrams, falls back to singleton unigram prior. Add-k=0.001 smoothing otherwise."
+B4_Markov2_m5,"If bigram context has < 5 observations, backs off to 1st-order Markov. If that context is also unseen, falls back to singleton unigram prior."
