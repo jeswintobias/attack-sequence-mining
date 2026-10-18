@@ -1,0 +1,83 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\title{\textbf{Mining Attack Sequences and Missing-Event Rules to Predict the Next Attacker Step: A Comprehensive Research and Implementation Blueprint}}
+\author{\textbf{Antigravity Cybersecurity \& Machine Learning Research Team}}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Modern multi-step cyber intrusions, such as Advanced Persistent Threats (APTs) and Human-Operated Ransomware (HoR), execute complex attack chains while actively evading detection mechanisms. Existing alert correlation and sequence prediction systems fail in two key regimes: first, they suffer from extreme false-alarm rates when fusing noisy multi-sensor telemetry; second, they implicitly assume that all attack steps generate positive event traces, breaking down when attackers use living-off-the-land techniques, unhooked system calls, or sensor blind spots. In this research report, we formulate the paradigm of \textbf{Mining Attack Sequences with Missing-Event Rules} to proactively forecast the next attacker step ($T_{k+1}$). Synthesizing empirical findings from state-of-the-art literature, we present a five-stage architecture incorporating multi-sensor alert robustness scoring, MITRE ATT\&CK semantic mapping, negative sequential pattern mining (NSPM) under sensor visibility constraints, and bi-directional LSTM and inverse reinforcement learning (IRL) for trajectory foretelling. We detail the theoretical formulations, algorithmic workflows, and an experimental evaluation protocol optimized for heavily imbalanced cybersecurity datasets.
+\end{abstract}
+
+\section{Introduction and Problem Formulation}
+Multi-stage cyber attacks are characterized by coordinated actions spanning reconnaissance, initial compromise, lateral movement, credential access, and eventual impact or data exfiltration. Unlike automated malware, human adversaries adaptively modify techniques in real time.
+
+\subsection{The Problem Statement}
+We define the research objective as: \emph{``Mining Attack Sequences and Missing-Event Rules to Predict the Next Attacker Step.''}
+
+In operational environments, security analysts face several hurdles:
+\begin{enumerate}
+    \item \textbf{Alert Volume and Heterogeneity}: Modern Security Operation Centers (SOCs) ingest up to 176 alerts per host per day across Endpoint Detection and Response (EDR), Network Intrusion Detection Systems (NIDS), and proxy systems, where over 99\% of alerts are false positives.
+    \item \textbf{The Missing-Event Conundrum}: Existing attack graph and sequence models operate on positive correlation: they expect an explicit alert $a_i$ at each attack step. When an adversary operates filelessly or uses direct system calls, intermediate alerts are absent. Traditional predictors fail to link prior steps to subsequent actions.
+    \item \textbf{Proactive Step Prediction}: Rather than flagging compromise after high-impact execution, defenders require calibrated forecasts of upcoming tactics and techniques ($T_{k+1}$) during early stages (e.g., privilege escalation).
+\end{enumerate}
+
+\section{Analysis of the Research Corpus}
+Our methodology synthesizes findings from eight foundational works:
+\begin{itemize}
+    \item \textbf{Alert Blending \& Ground Truth Quality (Roelofs et al., ACM SAC 2024)}: Establishes that training supervised ensembles (XGBoost) on final Incident Response Team (IRT) verdicts rather than noisy first-tier SOC escalations dramatically reduces false positives (from 31 to 2) and attains a Matthews Correlation Coefficient (MCC) of 0.998.
+    \item \textbf{Semantic Mapping ($M^2ASK$, Meng et al., ACM CCS 2024)}: Demonstrates effective mapping of NIDS alerts to MITRE ATT\&CK tactics and techniques using domain-specific word embeddings and DBSCAN clustering, distinguishing parallel vs.\ parent-child attack dependencies.
+    \item \textbf{Benchmark Alert Datasets (AIT-ADS, Landauer et al., CSET 2024)}: Provides 2.6 million alerts across Wazuh, Suricata, and AMiner. Formulates detector robustness ($s_{rob}$) and detection score ($s_{det}$) to filter noisy detectors and groups co-occurring alerts into meta-alerts with 98.93\% reduction.
+    \item \textbf{Bi-Directional Deep Sequence Prediction (DeepAG, Li et al., IEEE TDSC 2023)}: Solves the uni-directional LSTM bias by combining forward and backward LSTMs to validate predicted attack steps and resolves task concurrency via conditional probability tests.
+    \item \textbf{Parameter-Sensitive Foretelling \& IRL (MalAF, Liu et al., IEEE TDSC 2024)}: Filters API sequences using parameter sensitivity, extracts multi-stage attack slots via Pearson correlation, and applies model-free Inverse Reinforcement Learning (IRL) with Greedy Adaptive Dictionary (GAD) learning to infer intrinsic attacker preferences.
+    \item \textbf{Probabilistic Cloud Path Scoring (Ouyang et al., IEEE ISBDAS 2026)}: Integrates dynamic node compromise probabilities with a composite path score: $Score(P) = \alpha P_{avg} + \beta W_{trans} - \gamma T_{diff}$.
+    \item \textbf{Sequence Learning for Ransomware (Khan et al., ACM DTRAP 2026)}: Demonstrates that RNN/LSTM architectures trained on ordered 14-dimensional ATT\&CK vectors achieve 82\% accuracy and 0.9694 AUC, with stage-wise validation proving predictive capability well before encryption.
+    \item \textbf{APT System Architectures (Buchta et al., ACM DTRAP 2024)}: Outlines a universal reference architecture covering collection, storage, advanced graph analytics, reporting, and integration.
+\end{itemize}
+
+\section{Missing-Event Rule Formulation}
+A missing-event rule models the scenario where event $X$ occurs, expected intermediate event $\mathcal{M}$ does not occur, yet subsequent state $Y$ is reached:
+\begin{equation}
+R_{missing}: (X \wedge \neg \mathcal{M}) \xrightarrow{[\text{supp}, \text{conf}, \Delta \tau]} Y
+\end{equation}
+
+To distinguish between deliberate adversarial evasion and telemetry loss, we introduce the \textbf{Sensor Visibility Index (SVI)}:
+\begin{equation}
+\text{SVI}(h, \text{sensor}_j, \Delta \tau) = \frac{\# \text{Benign Heartbeats / Records on asset } h \text{ in } \Delta \tau}{\mathbb{E}[\text{Expected Baseline Volume}]}
+\end{equation}
+When $\text{SVI} > \theta_{active}$, the absence $\neg \mathcal{M}$ is confirmed as adversarial tradecraft, triggering the corresponding negative-association rule to boost the probability of candidate next steps.
+
+\section{Proposed System Architecture}
+The system operates across five coordinated phases:
+\begin{enumerate}
+    \item \textbf{Multi-Sensor Ingestion \& Robustness Filtering}: Raw alerts from EDR, NIDS, and system audit logs are filtered using detector scores $s_{det}(D)$ and aggregated into meta-alerts via temporal proximity.
+    \item \textbf{Semantic ATT\&CK Tagging \& Graph Construction}: Alerts are mapped to MITRE ATT\&CK techniques and formed into Dynamic Heterogeneous Graph Sequences (MDHGS) tracking processes, files, sockets, and users.
+    \item \textbf{Missing-Event Rule Extraction}: A negative sequence mining engine discovers rules of type $(X \wedge \neg \mathcal{M} \Rightarrow Y)$ validated against baseline operation.
+    \item \textbf{Bi-Directional Sequence \& Preference Foretelling}: A Bi-LSTM network predicts candidate next steps $T_{k+1}$, conditioned on the attacker's intrinsic preference vector $h_{pre}$ and active missing-event embeddings.
+    \item \textbf{Path Scoring \& Explainability}: Candidate attack paths are ranked using weighted confidence scoring and explained to SOC analysts using SHAP waterfall attributions.
+\end{enumerate}
+
+\section{Evaluation Protocol}
+Due to extreme class imbalance ($<0.1\%$ attack samples), models are evaluated using:
+\begin{itemize}
+    \item \textbf{Matthews Correlation Coefficient (MCC)} and \textbf{PR-AUC} rather than deceptive standard accuracy.
+    \item \textbf{Alert Reduction Rate (ARR)}, targeting $\ge 98.5\%$.
+    \item \textbf{Stage-Wise Early Detection Accuracy}, measuring forecasting performance across stages $k \in \{1, \dots, 14\}$.
+\end{itemize}
+
+\section{Conclusion}
+This framework bridges passive alert triage and proactive intrusion forecasting. By combining multi-source alert blending with missing-event rule mining, defenders can anticipate and disrupt sophisticated adversaries before they reach their final operational objectives.
+
+\end{document}

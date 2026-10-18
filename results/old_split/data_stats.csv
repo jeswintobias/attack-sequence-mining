@@ -1,0 +1,3 @@
+setting,collapse_subtechniques,total_extracted_sequences,unique_sequences,min_sequence_length,max_sequence_length,total_prefix_examples,unique_prefixes,train_unique_prefixes,test_unique_prefixes,train_examples,test_examples,top_5_techniques
+Uncollapsed,False,7723,2875,4,46,16739,11494,9195,2299,13437,3302,"{'T1564.003': 1537, 'T1070.006': 1489, 'T1056.004': 1443, 'T1055.012': 1398, 'T1055': 1324}"
+Collapsed,True,7537,2721,4,31,13937,8933,7146,1787,10954,2983,"{'T1070': 1728, 'T1564': 1648, 'T1055': 1551, 'T1056': 1411, 'T1106': 1252}"

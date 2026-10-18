@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS / Editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python Virtual Environments
+venv/
+.venv/
+env/
+*.env
+
+# Binary artifacts / serialization caches
+*.pkl
+
+# Large external logs (>2.5GB)
+data/ait_ads/
+
+# Research paper reference PDFs (contains 120MB PDF exceeding GitHub limits)
+Researach Papers/
