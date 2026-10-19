@@ -24,5 +24,8 @@ env/
 # Large external logs (>2.5GB)
 data/ait_ads/
 
+# Raw sightings CSV (large; keep local, do not track)
+data/sightings_v2_public.csv
+
 # Research paper reference PDFs (contains 120MB PDF exceeding GitHub limits)
 Researach Papers/
