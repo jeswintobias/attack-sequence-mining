@@ -1,0 +1,35 @@
+{
+  "search": "HalvingRandomSearchCV, 8 random candidates, 3-fold GroupKFold on training sequences",
+  "halving_resource": "n_estimators (40 to 160, factor 2)",
+  "early_stopping": "not used inside halving; final refit uses inner 15% group holdout, sequence-level MRR, patience 30",
+  "cv_best_unique_sequence_mrr": 0.5080694499965211,
+  "best_params": {
+    "colsample_bytree": 0.8080272084711243,
+    "learning_rate": 0.06017761665213941,
+    "max_depth": 9,
+    "min_child_samples": 22,
+    "num_leaves": 32,
+    "reg_alpha": 0.012983183102952342,
+    "reg_lambda": 0.05006716698355196,
+    "subsample": 0.9779976597381381,
+    "n_estimators": 160
+  },
+  "best_iteration_from_inner_holdout": 90,
+  "external_validation_metrics": {
+    "prefix_example_uw_top_1": 0.385806916426513,
+    "prefix_example_uw_top_3": 0.6635446685878963,
+    "prefix_example_uw_top_5": 0.7798991354466859,
+    "prefix_example_uw_mrr": 0.5573095020216959,
+    "unique_sequence_uw_top_1": 0.3600151072169421,
+    "unique_sequence_uw_top_3": 0.6423147291037199,
+    "unique_sequence_uw_top_5": 0.7627051745400368,
+    "unique_sequence_uw_mrr": 0.5362194914377538,
+    "prefix_example_macro_recall": 0.20389180506831886,
+    "prefix_example_macro_f1": 0.20450038949074695,
+    "unique_sequence_macro_recall": 0.20153531974306582,
+    "unique_sequence_macro_f1": 0.19966031276012944
+  },
+  "training_unique_sequences": 1633,
+  "validation_unique_sequences": 545,
+  "test_data_loaded": false
+}

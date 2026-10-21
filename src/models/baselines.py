@@ -30,9 +30,13 @@ from collections import Counter, defaultdict
 import numpy as np
 import pandas as pd
 
-sys.path.append(str(Path(__file__).resolve().parent))
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+ROOT = Path(__file__).resolve().parents[2]
+SRC = ROOT / "src"
+for p in [str(ROOT), str(SRC), str(SRC / "core")]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 import config
+from evaluation_metrics import macro_recall_f1
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -223,6 +227,9 @@ def evaluate_baseline(
         scores = evaluate_predictions(preds, r["next"], top_k_values)
         scores["prefix_len"] = r["prefix_len"]
         scores["dup_count"] = r["dup_count"]
+        scores["actual"] = r["next"]
+        scores["predicted"] = preds[0] if preds else None
+        scores["full_seq"] = tuple(r["full_seq"])
         records.append(scores)
 
     df_res = pd.DataFrame(records)
@@ -232,11 +239,28 @@ def evaluate_baseline(
     for col in ["top_1", "top_3", "top_5", "mrr"]:
         uw[f"uw_{col}"] = df_res[col].mean()
 
+    # Every full sequence contributes total weight 1, regardless of length.
+    per_sequence_n = df_res.groupby("full_seq")["full_seq"].transform("size")
+    sequence_weight = 1.0 / per_sequence_n.to_numpy(dtype=float)
+    for col in ["top_1", "top_3", "top_5", "mrr"]:
+        uw[f"seq_{col}"] = float(np.average(df_res[col], weights=sequence_weight))
+    uw.update(macro_recall_f1(df_res["actual"], df_res["predicted"]))
+    uw.update({
+        f"seq_{key}": value for key, value in macro_recall_f1(
+            df_res["actual"], df_res["predicted"], sequence_weight
+        ).items()
+    })
+
     # Aggregate: dup-weighted
     wt = {}
     total_w = df_res["dup_count"].sum()
     for col in ["top_1", "top_3", "top_5", "mrr"]:
         wt[f"wt_{col}"] = (df_res[col] * df_res["dup_count"]).sum() / total_w
+    wt.update({
+        f"wt_{key}": value for key, value in macro_recall_f1(
+            df_res["actual"], df_res["predicted"], df_res["dup_count"].to_numpy()
+        ).items()
+    })
 
     # By prefix length
     by_plen = {}
@@ -318,7 +342,7 @@ def run_baselines(
     if data_path is None:
         data_path = config.SIGHTINGS_DATA_PATH
     if results_dir is None:
-        results_dir = config.RESULTS_DIR
+        results_dir = config.BASELINES_RESULTS_DIR
 
     processed_dir = config.BASE_DIR / "data" / "processed"
 
@@ -361,7 +385,10 @@ def run_baselines(
     for r in all_results:
         row = {"model": r["model"]}
         for key in ["uw_top_1", "uw_top_3", "uw_top_5", "uw_mrr",
-                     "wt_top_1", "wt_top_3", "wt_top_5", "wt_mrr"]:
+                     "wt_top_1", "wt_top_3", "wt_top_5", "wt_mrr",
+                     "seq_top_1", "seq_top_3", "seq_top_5", "seq_mrr",
+                     "macro_recall", "macro_f1", "seq_macro_recall",
+                     "seq_macro_f1", "wt_macro_recall", "wt_macro_f1"]:
             row[key] = round(r[key], 4)
         rows.append(row)
     df_overall = pd.DataFrame(rows)

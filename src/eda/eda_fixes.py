@@ -10,8 +10,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-sys.path.append(str(Path(__file__).resolve().parent))
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+ROOT = Path(__file__).resolve().parents[2]
+SRC = ROOT / "src"
+for p in [str(ROOT), str(SRC), str(SRC / "core")]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 import config
 from split import collapse_technique, deduplicate_first_occurrence
 
@@ -62,7 +65,7 @@ def compute_length_stats():
     }
 
     df_stats = pd.DataFrame([row_stats, uniq_stats])
-    path = config.RESULTS_DIR / "length_stats_ge4.csv"
+    path = config.EDA_RESULTS_DIR / "length_stats_ge4.csv"
     df_stats.to_csv(path, index=False)
     print(f"Saved {path}")
     print(df_stats.to_string(index=False))

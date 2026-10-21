@@ -1,0 +1,4 @@
+min_support,n_frequent_itemsets,n_rules_conf_ge_05
+0.01,2043,5801
+0.03,849,2748
+0.05,535,1969

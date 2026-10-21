@@ -1,0 +1,35 @@
+{
+  "search": "Optuna TPE, 8 trials, 3-fold GroupKFold on training sequences",
+  "objective": "mean unique-sequence MRR across training CV folds",
+  "early_stopping": "inner 15% sequence-group holdout, validation log loss, patience 20, ceiling 160; use the stopping model during CV, then refit all training groups at selected tree count for final validation",
+  "best_training_cv_unique_sequence_mrr": 0.46564311598367375,
+  "best_params": {
+    "max_depth": 4,
+    "min_child_weight": 2.6499930225339505,
+    "learning_rate": 0.05407232133324004,
+    "subsample": 0.7164916560792167,
+    "colsample_bytree": 0.8059264473611898,
+    "gamma": 0.6974693032602092,
+    "reg_alpha": 0.0005660670699258885,
+    "reg_lambda": 0.043676355831098176
+  },
+  "best_iteration_from_inner_holdout": 115,
+  "external_validation_metrics": {
+    "prefix_example_uw_top_1": 0.3479827089337176,
+    "unique_sequence_uw_top_1": 0.3355798431945221,
+    "prefix_example_uw_top_3": 0.5965417867435159,
+    "unique_sequence_uw_top_3": 0.5822068807848625,
+    "prefix_example_uw_top_5": 0.736671469740634,
+    "unique_sequence_uw_top_5": 0.7247682898141614,
+    "prefix_example_uw_mrr": 0.5153026675862895,
+    "unique_sequence_uw_mrr": 0.502467299761063,
+    "prefix_example_macro_recall": 0.1498009664805653,
+    "prefix_example_macro_f1": 0.14365078419402807,
+    "unique_sequence_macro_recall": 0.15052532161828225,
+    "unique_sequence_macro_f1": 0.14459299753467664
+  },
+  "training_unique_sequences": 1633,
+  "validation_unique_sequences": 545,
+  "test_data_loaded": false,
+  "macro_metric_definition": "macro recall/F1 over labels observed in validation; sequence-balanced by inverse prefix count"
+}

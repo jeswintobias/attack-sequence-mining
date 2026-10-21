@@ -1,0 +1,2 @@
+n_sequences,n_resamples,mean_diff_b6_minus_b5,ci_2.5,ci_97.5,seed,b6_beats_b5_uw_mrr,chosen_min_expect,chosen_min_count,chosen_min_lift,chosen_alpha,chosen_n_inject,chosen_n_rules,grid_size,fire_rate
+545,1000,0.010804277733917225,-0.005455613338954422,0.02683671162164723,42,True,0.6,5,1.5,0.05,3,1082,48,0.9978386167146974

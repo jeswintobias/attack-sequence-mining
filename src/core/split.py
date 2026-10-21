@@ -25,8 +25,11 @@ from typing import List, Tuple, Dict, Any
 import numpy as np
 import pandas as pd
 
-sys.path.append(str(Path(__file__).resolve().parent))
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+ROOT = Path(__file__).resolve().parents[2]
+SRC = ROOT / "src"
+for p in [str(ROOT), str(SRC), str(SRC / "core")]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 import config
 
 
@@ -191,7 +194,7 @@ def run_split(data_path: Path = None, results_dir: Path = None):
     if data_path is None:
         data_path = config.SIGHTINGS_DATA_PATH
     if results_dir is None:
-        results_dir = config.RESULTS_DIR
+        results_dir = config.EDA_RESULTS_DIR
 
     processed_dir = config.BASE_DIR / "data" / "processed"
     processed_dir.mkdir(parents=True, exist_ok=True)

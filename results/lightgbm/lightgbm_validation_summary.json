@@ -1,0 +1,40 @@
+{
+  "search": "12-setting fixed grid; models use early stopping on inner sequence holdout",
+  "grid_parameters": {
+    "num_leaves": [
+      7,
+      15,
+      31
+    ],
+    "min_child_samples": [
+      10,
+      20
+    ],
+    "reg_lambda": [
+      1.0,
+      5.0
+    ]
+  },
+  "best_validation_config": {
+    "config_id": 9.0,
+    "num_leaves": 31.0,
+    "min_child_samples": 10.0,
+    "reg_lambda": 1.0,
+    "best_iteration": 101.0,
+    "prefix_example_uw_top_1": 0.39121037463976943,
+    "prefix_example_uw_top_3": 0.654178674351585,
+    "prefix_example_uw_top_5": 0.7770172910662824,
+    "prefix_example_uw_mrr": 0.5583428432889218,
+    "unique_sequence_uw_top_1": 0.369257113936013,
+    "unique_sequence_uw_top_3": 0.6368516447874246,
+    "unique_sequence_uw_top_5": 0.763088939602701,
+    "unique_sequence_uw_mrr": 0.5406947517122263,
+    "prefix_example_macro_recall": 0.20739816171891737,
+    "prefix_example_macro_f1": 0.20920488576839633,
+    "unique_sequence_macro_recall": 0.20516017416074797,
+    "unique_sequence_macro_f1": 0.20349628827107438
+  },
+  "training_unique_sequences": 1633,
+  "validation_unique_sequences": 545,
+  "test_data_loaded": false
+}

@@ -1,0 +1,4 @@
+min_support,n_frequent_itemsets,n_timing_runs,fpgrowth_time_mean_s,fpgrowth_time_std_s,apriori_time_mean_s,apriori_time_std_s,speedup_mean
+0.01,2043,10,0.0257,0.0062,0.0101,0.0054,0.4
+0.03,849,10,0.0158,0.0054,0.0057,0.0056,0.36
+0.05,535,10,0.0128,0.005,0.0025,0.0001,0.2

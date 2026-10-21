@@ -1,0 +1,4 @@
+min_support,n_transactions,n_frequent_itemsets,n_rules_conf_ge_05
+0.01,1633,2841,6851
+0.03,1633,1203,3356
+0.05,1633,764,2462

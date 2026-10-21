@@ -17,14 +17,17 @@ import matplotlib.ticker as mticker
 from scipy import stats as sp_stats
 
 import sys
-sys.path.append(str(Path(__file__).resolve().parent))
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+ROOT = Path(__file__).resolve().parents[2]
+SRC = ROOT / "src"
+for p in [str(ROOT), str(SRC), str(SRC / "core")]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 import config
 
 # ──────────────────────────────────────────────
 # Global settings
 # ──────────────────────────────────────────────
-FIG_DIR = config.RESULTS_DIR / "figures"
+FIG_DIR = config.EDA_RESULTS_DIR / "figures"
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 DPI = 300
 plt.rcParams.update({
@@ -523,7 +526,7 @@ def write_length_stats(df):
         "n": len(lens),
     }
     out = pd.DataFrame([stats])
-    path = config.RESULTS_DIR / "length_stats.csv"
+    path = config.EDA_RESULTS_DIR / "length_stats.csv"
     out.to_csv(path, index=False)
     print(f"  Saved {path}")
 

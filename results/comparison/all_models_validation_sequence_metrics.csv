@@ -1,0 +1,10 @@
+model,seq_top_1,seq_top_3,seq_top_5,seq_mrr,seq_macro_recall,seq_macro_f1,macro_label_scope
+B1_Majority,0.1047,0.2371,0.3543,0.2497,0.0152,0.0029,validation-observed target labels
+B2_UnigramPrior,0.05,0.1044,0.1123,0.1174,0.0152,0.0014,validation-observed target labels
+B3_Markov1_k0.001,0.1659,0.4249,0.572,0.3518,0.1267,0.0944,validation-observed target labels
+B4_Markov2_m5,0.277,0.5046,0.6433,0.4312,0.1941,0.1719,validation-observed target labels
+B5_PrefixSpan_sup0.01_conf0.7,0.2772,0.5043,0.6474,0.4311,0.1799,0.1589,validation-observed target labels
+B6_NegativeRules,0.2792,0.5067,0.669,0.4418,0.0783,0.0579,validation-observed target labels
+LightGBM_Grid_config9,0.369257,0.636852,0.763089,0.540695,0.20516,0.203496,validation-observed target labels
+LightGBM_HalvingRandomSearchCV,0.360015,0.642315,0.762705,0.536219,0.201535,0.19966,validation-observed target labels
+XGBoost_Optuna,0.33558,0.582207,0.724768,0.502467,0.150525,0.144593,validation-observed target labels

@@ -1,0 +1,2 @@
+variant,n_unique_seqs_used,n_monotonic_dropped_unique,n_monotonic_dropped_weighted,real_mean_asymmetry,n_qualifying_pairs,n_strong_pairs_gt05,strong_pairs_ascending_id_share,shuffled_mean,shuffled_p2.5,shuffled_p97.5,n_shuffled_ge_real,p_value,n_shuffles
+control_no_monotonic,1572,61,1401,0.591782,134,80,0.55,0.108868,0.094798,0.121476,0,0.004975,200

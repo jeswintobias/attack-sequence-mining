@@ -26,8 +26,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 import sys
-sys.path.append(str(Path(__file__).resolve().parent))
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+ROOT = Path(__file__).resolve().parents[2]
+SRC = ROOT / "src"
+for p in [str(ROOT), str(SRC), str(SRC / "core")]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 import config
 
 
@@ -295,4 +298,4 @@ def run_stage_a(data_path: Path, results_dir: Path) -> Dict[str, Any]:
 
 
 if __name__ == "__main__":
-    run_stage_a(config.DATA_PATH, config.RESULTS_DIR)
+    run_stage_a(config.DATA_PATH, config.EDA_RESULTS_DIR)

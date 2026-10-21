@@ -29,8 +29,11 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-sys.path.append(str(Path(__file__).resolve().parent))
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+ROOT = Path(__file__).resolve().parents[2]
+SRC = ROOT / "src"
+for p in [str(ROOT), str(SRC), str(SRC / "core")]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 import config
 
 
@@ -80,7 +83,7 @@ def run_order_signal_test(
 ):
     """Run the permutation test on train sequences only."""
     if results_dir is None:
-        results_dir = config.RESULTS_DIR
+        results_dir = config.EDA_RESULTS_DIR
     fig_dir = results_dir / "figures"
     fig_dir.mkdir(parents=True, exist_ok=True)
 

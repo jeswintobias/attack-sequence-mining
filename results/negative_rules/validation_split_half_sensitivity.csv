@@ -1,0 +1,3 @@
+tune_split,test_split,min_expect,min_count,min_lift,alpha,n_inject,n_rules,tune_uw_mrr,test_uw_top1,test_uw_top3,test_uw_top5,test_uw_mrr,test_wt_top1,test_wt_mrr
+Half A,Half B,0.6,5,1.5,0.01,3,870,0.4593,0.2974,0.5331,0.6937,0.4631,0.2815,0.477
+Half B,Half A,0.6,5,1.5,0.05,2,1082,0.4643,0.2949,0.5535,0.6785,0.4571,0.4211,0.5751
