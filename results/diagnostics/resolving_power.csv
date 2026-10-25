@@ -1,0 +1,4 @@
+design,n_sequences,per_sequence_sd,standard_error,ci95_half_width,min_unpaired_detectable_diff
+single 545-sequence validation holdout,545,0.2093,0.009,0.0176,0.0355
+final test split,543,0.2093,0.009,0.0176,0.0356
+5-fold CV over the development set,2178,0.2093,0.0045,0.0088,0.0178

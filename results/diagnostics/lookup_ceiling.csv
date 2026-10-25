@@ -1,0 +1,6 @@
+context,n_contexts,reuse_rate,mean_distinct_labels_when_reused,loo_top_1,loo_mrr
+last1,98,0.7143,12.43,0.2379,0.4047
+last2,852,0.6244,6.02,0.2973,0.4474
+last3,3325,0.4602,3.05,0.3084,0.4224
+full_ordered_prefix,7365,0.1556,2.43,0.2173,0.342
+prefix_as_set,5185,0.2999,2.49,0.2983,0.4132
