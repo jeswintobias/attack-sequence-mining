@@ -509,14 +509,32 @@ def run_positive_control_experiment(train_ex, seqs, b5, val_ex):
 
     print(f"B7 Best Config: expect={best_cfg['min_expect']}, count={best_cfg['min_count']}, lift={best_cfg['min_lift']}, alpha={best_cfg['alpha']}, n_inject={best_cfg['n_inject']} (rules={best_cfg['n_rules']}, uw_MRR={best_cfg['uw_mrr']:.4f})")
     
-    # Save best B7 results side-by-side with B4, B5, B6
+    # Save best B7 results side-by-side with B4, B5, B6.
+    # The B4/B5/B6 rows were previously hardcoded literals, which went stale as
+    # soon as those models were re-run. They are now read from the summary that
+    # negative_predictor.py computes, so every number here comes from code and
+    # the four rows describe the same evaluation settings.
     res_b7 = best_cfg["res"]
-    comparison_rows = [
-        {"model": "B4_Markov2_m5", "uw_top1": 0.2839, "uw_top3": 0.5191, "uw_top5": 0.6538, "uw_mrr": 0.4415, "wt_top1": 0.4850, "wt_top3": 0.7324, "wt_top5": 0.8097, "wt_mrr": 0.6288},
-        {"model": "B5_PrefixSpan_sup0.01_conf0.7", "uw_top1": 0.2824, "uw_top3": 0.5180, "uw_top5": 0.6567, "uw_mrr": 0.4400, "wt_top1": 0.5561, "wt_top3": 0.7367, "wt_top5": 0.8159, "wt_mrr": 0.6658},
-        {"model": "B6_NegativeRules (X and not M -> Y)", "uw_top1": 0.2965, "uw_top3": 0.5382, "uw_top5": 0.6913, "uw_mrr": 0.4612, "wt_top1": 0.3400, "wt_top3": 0.5493, "wt_top5": 0.8273, "wt_mrr": 0.5154},
-        {"model": f"B7_PositiveControl (X and M -> Y, inj={best_cfg['n_inject']})", "uw_top1": round(res_b7["uw_top_1"], 4), "uw_top3": round(res_b7["uw_top_3"], 4), "uw_top5": round(res_b7["uw_top_5"], 4), "uw_mrr": round(res_b7["uw_mrr"], 4), "wt_top1": round(res_b7["wt_top_1"], 4), "wt_top3": round(res_b7["wt_top_3"], 4), "wt_top5": round(res_b7["wt_top_5"], 4), "wt_mrr": round(res_b7["wt_mrr"], 4)},
-    ]
+    short = ("top1", "top3", "top5", "mrr")
+    full = ("top_1", "top_3", "top_5", "mrr")
+    comparison_rows = []
+    summary_path = config.NEGATIVE_RULES_RESULTS_DIR / "validation_negative_rule_summary.csv"
+    if summary_path.exists():
+        summary = pd.read_csv(summary_path)
+        overall = summary.loc[summary["section"] == "overall"]
+        for _, row in overall.iterrows():
+            comparison_rows.append({
+                "model": row["model"],
+                **{f"uw_{s}": round(float(row[f"uw_{f}"]), 4) for s, f in zip(short, full)},
+                **{f"wt_{s}": round(float(row[f"wt_{f}"]), 4) for s, f in zip(short, full)},
+            })
+    else:
+        print(f"Warning: {summary_path} missing; run negative_predictor.py for the B4-B6 rows")
+    comparison_rows.append({
+        "model": f"B7_PositiveControl (X and M -> Y, inj={best_cfg['n_inject']})",
+        **{f"uw_{s}": round(float(res_b7[f"uw_{f}"]), 4) for s, f in zip(short, full)},
+        **{f"wt_{s}": round(float(res_b7[f"wt_{f}"]), 4) for s, f in zip(short, full)},
+    })
     df_comp = pd.DataFrame(comparison_rows)
     df_comp.to_csv(config.NEGATIVE_RULES_RESULTS_DIR / "validation_b7_positive_control.csv", index=False)
     print("\n── SIDE-BY-SIDE MODEL COMPARISON TABLE (VALIDATION) ──")

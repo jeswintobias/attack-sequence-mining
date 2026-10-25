@@ -34,6 +34,7 @@ from baselines import (
     build_singleton_prior,
     evaluate_baseline,
     evaluate_predictions,
+    mask_seen,
 )
 from prefixspan_predictor import PrefixSpanPredictor
 from negative_rules import (
@@ -144,7 +145,7 @@ def _metrics_from_pred_lists(pred_lists, examples, model_name):
 def _per_example_eval(model, examples):
     rows = []
     for _, r in examples.iterrows():
-        preds = model.predict(r["prefix"])
+        preds = mask_seen(model.predict(r["prefix"]), r["prefix"])
         scores = evaluate_predictions(preds, r["next"])
         fired = False
         if hasattr(model, "fired_rules"):
