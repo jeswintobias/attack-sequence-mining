@@ -3,7 +3,7 @@ Task 3 – PrefixSpan Pattern-Based Next-Step Predictor & Validation Evaluation.
 
 Algorithm & Architecture:
   1. Mine frequent sequential patterns from train sequences using our custom
-     PrefixSpan (src/prefixspan.py) with projected databases.
+     PrefixSpan (src/mining/prefixspan.py) with projected databases.
   2. Extract sequential rules:
        Antecedent A -> Consequent x
        Rule confidence = support(A + [x]) / support(A)

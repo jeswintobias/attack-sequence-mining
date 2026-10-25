@@ -1,10 +1,10 @@
 """LightGBM next-technique experiments; train/validation only, never test.
 
 Run from the repository root:
-  python src/lightgbm_predictor.py --search grid
+  python src/models/lightgbm_predictor.py --search grid
   python -m pip install optuna
-  python src/lightgbm_predictor.py --search optuna
-  python src/lightgbm_predictor.py --search halving
+  python src/models/lightgbm_predictor.py --search optuna
+  python src/models/lightgbm_predictor.py --search halving
 
 All predictors use prefix-presence, last-four-position, and prefix-length
 features. Search CV groups by full sequence so prefixes from one sequence
@@ -74,6 +74,37 @@ def _make_features(examples: pd.DataFrame, techniques: list[str]) -> pd.DataFram
     return pd.DataFrame(X, columns=cols)
 
 
+def _seen_mask(X: pd.DataFrame, class_names) -> np.ndarray:
+    """True where a candidate class already appears in that row's prefix.
+
+    Read straight off the seen_* feature block, so scorers that only hold a
+    feature matrix do not need the original prefixes. See
+    config.MASK_SEEN_TECHNIQUES for why these candidates are ruled out.
+    """
+    mask = np.zeros((len(X), len(class_names)), dtype=bool)
+    if not config.MASK_SEEN_TECHNIQUES:
+        return mask
+    present = [(j, f"seen_{name}") for j, name in enumerate(class_names)]
+    present = [(j, col) for j, col in present if col in X.columns]
+    if present:
+        mask[:, [j for j, _ in present]] = X[[col for _, col in present]].to_numpy() > 0.5
+    return mask
+
+
+def _ranked_labels(probabilities, class_names, seen_mask=None) -> np.ndarray:
+    """Per-row candidate ranking, pushing masked candidates to the back."""
+    scores = np.asarray(probabilities, dtype=float)
+    if seen_mask is not None:
+        scores = np.where(seen_mask, -np.inf, scores)
+    names = np.asarray(class_names, dtype=object)
+    return names[np.argsort(-scores, axis=1, kind="stable")]
+
+
+def _class_names(model_classes, label_names) -> np.ndarray:
+    """Map a model's integer classes back to technique IDs."""
+    return np.asarray(label_names, dtype=object)[np.asarray(model_classes, dtype=int)]
+
+
 def _sequence_weights(examples: pd.DataFrame) -> np.ndarray:
     """Each sequence's prefix rows sum to its duplicate count."""
     seq_ids = examples["full_seq"].map(lambda s: tuple(s))
@@ -103,7 +134,7 @@ def _base_params(params: dict, n_estimators: int = MAX_ESTIMATORS) -> dict:
     }
 
 
-def _fit_with_group_early_stopping(X, y, weights, groups, params):
+def _fit_with_group_early_stopping(X, y, weights, groups, params, label_names=None):
     """Find tree count on an inner sequence holdout, then refit all supplied rows."""
     splitter = GroupShuffleSplit(n_splits=1, test_size=0.15, random_state=config.RANDOM_SEED)
     fit_idx, stop_idx = next(splitter.split(X, y, groups))
@@ -115,11 +146,18 @@ def _fit_with_group_early_stopping(X, y, weights, groups, params):
 
     stop_groups = groups[stop_idx]
     fit_class_labels = np.unique(y[fit_idx])
+    # Stop on the same masked ranking the reported metrics use.
+    stop_mask = (
+        None if label_names is None
+        else _seen_mask(X.iloc[stop_idx], _class_names(fit_class_labels, label_names))
+    )
 
     def sequence_mrr(y_true, y_pred):
         return (
             "sequence_mrr",
-            _mrr_from_probabilities(y_true, y_pred, stop_groups, fit_class_labels),
+            _mrr_from_probabilities(
+                y_true, y_pred, stop_groups, fit_class_labels, stop_mask
+            ),
             True,
         )
 
@@ -140,13 +178,27 @@ def _fit_with_group_early_stopping(X, y, weights, groups, params):
     return final_model, best_iteration
 
 
+def _mrr_from_probabilities(y, probabilities, groups, class_labels=None, seen_mask=None):
+    """Mean per-sequence MRR, respecting a model's external class labels."""
+    labels = np.arange(probabilities.shape[1]) if class_labels is None else np.asarray(class_labels)
+    ranked = _ranked_labels(probabilities, labels, seen_mask)
+    reciprocal = np.zeros(len(y), dtype=float)
+    for i, target in enumerate(y):
+        matches = np.flatnonzero(ranked[i] == target)
+        if len(matches):
+            reciprocal[i] = 1.0 / (matches[0] + 1)
+    frame = pd.DataFrame({"group": groups, "mrr": reciprocal})
+    return float(frame.groupby("group")["mrr"].mean().mean())
+
+
 def _metrics(model, X, examples, labels):
-    probabilities = model.predict_proba(X)
-    output_labels = np.asarray(labels, dtype=object)
+    class_names = _class_names(model.classes_, labels)
+    ranked = _ranked_labels(
+        model.predict_proba(X), class_names, _seen_mask(X, class_names)
+    )
     records = []
     for i, (_, row) in enumerate(examples.iterrows()):
-        rank = np.argsort(-probabilities[i], kind="stable")
-        pred = output_labels[rank]
+        pred = ranked[i]
         score = evaluate_predictions(pred.tolist(), row["next"])
         records.append({
             **score,
@@ -172,31 +224,16 @@ def _metrics(model, X, examples, labels):
     return metrics
 
 
-def _mrr_from_probabilities(y, probabilities, groups, class_labels=None):
-    """Mean per-sequence MRR, respecting a model's external class labels."""
-    labels = np.arange(probabilities.shape[1]) if class_labels is None else np.asarray(class_labels)
-    ranked = labels[np.argsort(-probabilities, axis=1, kind="stable")]
-    reciprocal = np.zeros(len(y), dtype=float)
-    for i, target in enumerate(y):
-        matches = np.flatnonzero(ranked[i] == target)
-        if len(matches):
-            reciprocal[i] = 1.0 / (matches[0] + 1)
-    frame = pd.DataFrame({"group": groups, "mrr": reciprocal})
-    return float(frame.groupby("group")["mrr"].mean().mean())
-
-
-def _cv_sequence_mrr(model, X, y, groups):
+def _cv_sequence_mrr(model, X, y, groups, label_names=None):
     """Mean per-sequence MRR for one GroupKFold validation fold."""
-    probabilities = model.predict_proba(X)
     model_classes = np.asarray(model.classes_)
-    ranked = model_classes[np.argsort(-probabilities, axis=1, kind="stable")]
-    reciprocal = np.zeros(len(y), dtype=float)
-    for i, target in enumerate(y):
-        matches = np.flatnonzero(ranked[i] == target)
-        if len(matches):
-            reciprocal[i] = 1.0 / (matches[0] + 1)
-    frame = pd.DataFrame({"group": groups, "mrr": reciprocal})
-    return float(frame.groupby("group")["mrr"].mean().mean())
+    seen_mask = (
+        None if label_names is None
+        else _seen_mask(X, _class_names(model_classes, label_names))
+    )
+    return _mrr_from_probabilities(
+        y, model.predict_proba(X), groups, model_classes, seen_mask
+    )
 
 
 def _prepare():
@@ -236,10 +273,11 @@ def _optuna_search():
         fold_scores = []
         for fold_i, (outer_train, outer_val) in enumerate(cv.split(X, y, groups)):
             model, _ = _fit_with_group_early_stopping(
-                X.iloc[outer_train], y[outer_train], weights[outer_train], groups[outer_train], params
+                X.iloc[outer_train], y[outer_train], weights[outer_train],
+                groups[outer_train], params, encoder.classes_
             )
             score = _cv_sequence_mrr(
-                model, X.iloc[outer_val], y[outer_val], groups[outer_val]
+                model, X.iloc[outer_val], y[outer_val], groups[outer_val], encoder.classes_
             )
             fold_scores.append(score)
             trial.report(float(np.mean(fold_scores)), step=fold_i)
@@ -252,7 +290,9 @@ def _optuna_search():
     study = optuna.create_study(direction="maximize", sampler=sampler, pruner=pruner)
     study.optimize(objective, n_trials=12, show_progress_bar=False)
 
-    model, best_iteration = _fit_with_group_early_stopping(X, y, weights, groups, study.best_params)
+    model, best_iteration = _fit_with_group_early_stopping(
+        X, y, weights, groups, study.best_params, encoder.classes_
+    )
     metrics = _metrics(model, X_val, val, list(encoder.classes_))
     trials_path = config.LIGHTGBM_RESULTS_DIR / "lightgbm_optuna_trials.csv"
     study.trials_dataframe().to_csv(trials_path, index=False)
@@ -288,7 +328,9 @@ def _halving_search():
         # Primary scoring is unweighted by source duplicates; each sequence
         # contributes equally after its prefix rows are aggregated.
         fold_groups = np.asarray([group_by_index[i] for i in X_fold.index], dtype=int)
-        return _cv_sequence_mrr(estimator, X_fold, np.asarray(y_fold), fold_groups)
+        return _cv_sequence_mrr(
+            estimator, X_fold, np.asarray(y_fold), fold_groups, encoder.classes_
+        )
 
     estimator = lgb.LGBMClassifier(**_base_params({}))
     space = {
@@ -313,7 +355,7 @@ def _halving_search():
     # run within those CV rounds. Apply sequence-grouped early stopping on the
     # final refit, then score the selected model on external validation.
     model, best_iteration = _fit_with_group_early_stopping(
-        X, y, weights, groups, search.best_params_
+        X, y, weights, groups, search.best_params_, encoder.classes_
     )
     metrics = _metrics(model, X_val, val, list(encoder.classes_))
     cv_path = config.LIGHTGBM_RESULTS_DIR / "lightgbm_halving_cv_results.csv"
@@ -346,7 +388,9 @@ def _grid_search():
     ]
     records = []
     for i, params in enumerate(configs, 1):
-        model, best_iteration = _fit_with_group_early_stopping(X, y, weights, groups, params)
+        model, best_iteration = _fit_with_group_early_stopping(
+            X, y, weights, groups, params, encoder.classes_
+        )
         metrics = _metrics(model, X_val, val, list(encoder.classes_))
         records.append({"config_id": i, **params, "best_iteration": best_iteration, **metrics})
         print(f"Grid {i}/{len(configs)}: sequence-level MRR={metrics['unique_sequence_uw_mrr']:.4f}")

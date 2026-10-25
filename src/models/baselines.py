@@ -65,6 +65,21 @@ def ranked_predictions(score_dict: dict) -> list:
     return sorted(score_dict.keys(), key=lambda t: (-score_dict[t], t))
 
 
+def mask_seen(predictions: list, prefix) -> list:
+    """
+    Drop candidates already present in the prefix.
+
+    First-occurrence deduplication means a technique occurs at most once per
+    sequence, so the target can never be a prefix member. Controlled by
+    config.MASK_SEEN_TECHNIQUES so the behaviour can be switched off and the
+    unmasked numbers reproduced.
+    """
+    if not config.MASK_SEEN_TECHNIQUES:
+        return predictions
+    seen = set(prefix)
+    return [t for t in predictions if t not in seen]
+
+
 def evaluate_predictions(
     predictions: list,
     actual: str,
@@ -223,7 +238,7 @@ def evaluate_baseline(
     """
     records = []
     for _, r in examples.iterrows():
-        preds = model.predict(r["prefix"])
+        preds = mask_seen(model.predict(r["prefix"]), r["prefix"])
         scores = evaluate_predictions(preds, r["next"], top_k_values)
         scores["prefix_len"] = r["prefix_len"]
         scores["dup_count"] = r["dup_count"]

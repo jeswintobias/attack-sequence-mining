@@ -28,6 +28,7 @@ NEGATIVE_RULES_RESULTS_DIR = RESULTS_DIR / "negative_rules"
 LIGHTGBM_RESULTS_DIR = RESULTS_DIR / "lightgbm"
 XGBOOST_RESULTS_DIR = RESULTS_DIR / "xgboost"
 COMPARISON_RESULTS_DIR = RESULTS_DIR / "comparison"
+CV_RESULTS_DIR = RESULTS_DIR / "cv"
 
 # Ensure all result subdirectories exist
 ALL_RESULT_DIRS = [
@@ -40,6 +41,7 @@ ALL_RESULT_DIRS = [
     LIGHTGBM_RESULTS_DIR,
     XGBOOST_RESULTS_DIR,
     COMPARISON_RESULTS_DIR,
+    CV_RESULTS_DIR,
 ]
 for d in ALL_RESULT_DIRS:
     d.mkdir(parents=True, exist_ok=True)
@@ -67,6 +69,32 @@ TEST_FRAC = 0.20
 
 # Top-K evaluation values for prediction baselines
 TOP_K_VALUES = [1, 3, 5]
+
+# Rule out candidates already present in the prefix before ranking.
+# Rationale for viva: first-occurrence deduplication (DEC-03) means a technique
+# appears at most once per sequence, so the target is never a member of its own
+# prefix (verified 0/8,329 train and 0/2,776 validation examples). Ranking a
+# prefix member wastes a top-k slot on an outcome the label construction has
+# excluded. Caveat: this is a property of our deduplication choice, not of real
+# attacker behaviour -- adversaries do repeat techniques -- so the masked
+# metrics describe the task as defined here. Applied to every model so the
+# comparison stays on one footing.
+MASK_SEEN_TECHNIQUES = True
+
+# ==========================================
+# 1b. Cross-validated evaluation protocol
+# ==========================================
+# Model selection and comparative reporting run on a development set that merges
+# the original train and validation splits (2,178 unique sequences), using
+# N_CV_FOLDS grouped, length-stratified folds. Measured rationale: a single
+# 545-sequence validation holdout has SE 0.0090 on sequence MRR (95% CI
+# half-width 0.0176), so the smallest unpaired difference it can resolve is
+# about 0.036 -- while the three LightGBM searches differed by only 0.0047.
+# Five folds over the development set halve that SE to 0.0045. The test split
+# stays sealed for a single confirmatory run.
+N_CV_FOLDS = 5
+DEV_SPLITS = ("train", "val")
+SEALED_SPLITS = ("test",)
 
 # Association rule mining (Stage C) and PrefixSpan (Stage D) parameters
 MIN_SUPPORT = 0.1
