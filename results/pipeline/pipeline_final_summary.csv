@@ -1,0 +1,4 @@
+model,seq_top_1,seq_top_3,seq_top_5,seq_mrr,seq_macro_recall,seq_macro_f1,seq_mrr_sd
+LightGBM_softprob,0.3694,0.636,0.7559,0.5386,0.2299,0.2269,0.0132
+Pipeline_base,0.3458,0.574,0.6936,0.5014,0.2369,0.2321,0.0081
+Pipeline_ABC,0.3466,0.5723,0.6899,0.5026,0.242,0.2367,0.0105
