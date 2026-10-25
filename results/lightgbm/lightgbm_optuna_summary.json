@@ -1,7 +1,7 @@
 {
   "search": "Optuna TPE, 12 trials, 3-fold GroupKFold on training sequences",
   "early_stopping": "inner 15% group holdout, sequence-level MRR, patience 30; refit all supplied training groups at best iteration",
-  "cv_best_unique_sequence_mrr": 0.5109597040796506,
+  "cv_best_unique_sequence_mrr": 0.5095218479270336,
   "best_params": {
     "num_leaves": 54,
     "max_depth": 9,
@@ -12,16 +12,20 @@
     "colsample_bytree": 0.7168578594140872,
     "subsample": 0.8099085529881075
   },
-  "best_iteration_from_inner_holdout": 149,
+  "best_iteration_from_inner_holdout": 152,
   "external_validation_metrics": {
-    "prefix_example_uw_top_1": 0.3850864553314121,
-    "prefix_example_uw_top_3": 0.6523775216138329,
-    "prefix_example_uw_top_5": 0.7770172910662824,
-    "prefix_example_uw_mrr": 0.5538608523139094,
-    "unique_sequence_uw_top_1": 0.3654562613736925,
-    "unique_sequence_uw_top_3": 0.6364153888924531,
-    "unique_sequence_uw_top_5": 0.7629797216035749,
-    "unique_sequence_uw_mrr": 0.5374640084564485
+    "prefix_example_uw_top_1": 0.385806916426513,
+    "prefix_example_uw_top_3": 0.6534582132564841,
+    "prefix_example_uw_top_5": 0.7788184438040345,
+    "prefix_example_uw_mrr": 0.554865956253804,
+    "unique_sequence_uw_top_1": 0.36591934568998785,
+    "unique_sequence_uw_top_3": 0.6363491299729832,
+    "unique_sequence_uw_top_5": 0.7643245134070822,
+    "unique_sequence_uw_mrr": 0.537948926671579,
+    "prefix_example_macro_recall": 0.19547003787682443,
+    "prefix_example_macro_f1": 0.19903381940668954,
+    "unique_sequence_macro_recall": 0.19519552320165026,
+    "unique_sequence_macro_f1": 0.1961785773424417
   },
   "training_unique_sequences": 1633,
   "validation_unique_sequences": 545,

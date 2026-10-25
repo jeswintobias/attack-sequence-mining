@@ -27,6 +27,20 @@ def _find_path(filename: str, preferred_dir: Path) -> Path:
     return p
 
 
+def _row_from_summary(name: str, metrics: dict) -> dict:
+    """One comparison row from a tree-model summary's validation metrics."""
+    return {
+        "model": name,
+        "seq_top_1": metrics["unique_sequence_uw_top_1"],
+        "seq_top_3": metrics["unique_sequence_uw_top_3"],
+        "seq_top_5": metrics["unique_sequence_uw_top_5"],
+        "seq_mrr": metrics["unique_sequence_uw_mrr"],
+        "seq_macro_recall": metrics["unique_sequence_macro_recall"],
+        "seq_macro_f1": metrics["unique_sequence_macro_f1"],
+        "macro_label_scope": "validation-observed target labels",
+    }
+
+
 def _row_from_baseline(row):
     return {
         "model": row["model"],
@@ -66,33 +80,23 @@ def build_comparison():
         "macro_label_scope": "validation-observed target labels",
     })
 
-    halving_path = _find_path("lightgbm_halving_summary.json", config.LIGHTGBM_RESULTS_DIR)
-    if halving_path.exists():
-        halving = json.loads(halving_path.read_text())["external_validation_metrics"]
-        rows.append({
-            "model": "LightGBM_HalvingRandomSearchCV",
-            "seq_top_1": halving["unique_sequence_uw_top_1"],
-            "seq_top_3": halving["unique_sequence_uw_top_3"],
-            "seq_top_5": halving["unique_sequence_uw_top_5"],
-            "seq_mrr": halving["unique_sequence_uw_mrr"],
-            "seq_macro_recall": halving["unique_sequence_macro_recall"],
-            "seq_macro_f1": halving["unique_sequence_macro_f1"],
-            "macro_label_scope": "validation-observed target labels",
-        })
-
-    xgb_path = _find_path("xgboost_optuna_summary.json", config.XGBOOST_RESULTS_DIR)
-    if xgb_path.exists():
-        xgb_metrics = json.loads(xgb_path.read_text())["external_validation_metrics"]
-        rows.append({
-            "model": "XGBoost_Optuna",
-            "seq_top_1": xgb_metrics["unique_sequence_uw_top_1"],
-            "seq_top_3": xgb_metrics["unique_sequence_uw_top_3"],
-            "seq_top_5": xgb_metrics["unique_sequence_uw_top_5"],
-            "seq_mrr": xgb_metrics["unique_sequence_uw_mrr"],
-            "seq_macro_recall": xgb_metrics["unique_sequence_macro_recall"],
-            "seq_macro_f1": xgb_metrics["unique_sequence_macro_f1"],
-            "macro_label_scope": "validation-observed target labels",
-        })
+    # Every search that produced a summary is listed, so the table shows which
+    # selection protocol each number came from rather than only the best ones.
+    summaries = [
+        ("LightGBM_Optuna", "lightgbm_optuna_summary.json", config.LIGHTGBM_RESULTS_DIR),
+        ("LightGBM_HalvingRandomSearchCV", "lightgbm_halving_summary.json", config.LIGHTGBM_RESULTS_DIR),
+        ("XGBoost_Optuna", "xgboost_optuna_summary.json", config.XGBOOST_RESULTS_DIR),
+    ]
+    for name, filename, directory in summaries:
+        path = _find_path(filename, directory)
+        if not path.exists():
+            print(f"Skipping {name}: {path} not found")
+            continue
+        metrics = json.loads(path.read_text())["external_validation_metrics"]
+        if "unique_sequence_macro_recall" not in metrics:
+            print(f"Skipping {name}: summary predates the macro metrics; re-run that search")
+            continue
+        rows.append(_row_from_summary(name, metrics))
 
     frame = pd.DataFrame(rows)
     metric_cols = ["seq_top_1", "seq_top_3", "seq_top_5", "seq_mrr",
