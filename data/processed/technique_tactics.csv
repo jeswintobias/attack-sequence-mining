@@ -1,0 +1,27 @@
+technique,tactic
+T1021,Defense Evasion
+T1021,Initial Access
+T1021,Lateral Movement
+T1021,Persistence
+T1021,Privilege Escalation
+T1055,Defense Evasion
+T1055,Discovery
+T1055,Initial Access
+T1055,Privilege Escalation
+T1078,Defense Evasion
+T1078,Initial Access
+T1078,Lateral Movement
+T1078,Persistence
+T1078,Privilege Escalation
+T1083,Defense Evasion
+T1083,Discovery
+T1083,Initial Access
+T1083,Privilege Escalation
+T1110,Credential Access
+T1190,Defense Evasion
+T1190,Discovery
+T1190,Initial Access
+T1190,Privilege Escalation
+T1548,Defense Evasion
+T1548,Privilege Escalation
+T1595,Reconnaissance

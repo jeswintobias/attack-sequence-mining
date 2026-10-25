@@ -1,0 +1,242 @@
+technique,tactic,tactic_id
+T1001,Command and Control,TA0011
+T1003,Credential Access,TA0006
+T1005,Collection,TA0009
+T1006,Defense Evasion,TA0005
+T1007,Discovery,TA0007
+T1008,Command and Control,TA0011
+T1010,Discovery,TA0007
+T1011,Exfiltration,TA0010
+T1012,Discovery,TA0007
+T1014,Defense Evasion,TA0005
+T1016,Discovery,TA0007
+T1018,Discovery,TA0007
+T1020,Exfiltration,TA0010
+T1021,Lateral Movement,TA0008
+T1025,Collection,TA0009
+T1027,Defense Evasion,TA0005
+T1029,Exfiltration,TA0010
+T1030,Exfiltration,TA0010
+T1033,Discovery,TA0007
+T1036,Defense Evasion,TA0005
+T1037,Persistence,TA0003
+T1037,Privilege Escalation,TA0004
+T1039,Collection,TA0009
+T1040,Credential Access,TA0006
+T1040,Discovery,TA0007
+T1041,Exfiltration,TA0010
+T1046,Discovery,TA0007
+T1047,Execution,TA0002
+T1048,Exfiltration,TA0010
+T1049,Discovery,TA0007
+T1052,Exfiltration,TA0010
+T1053,Execution,TA0002
+T1053,Persistence,TA0003
+T1053,Privilege Escalation,TA0004
+T1055,Defense Evasion,TA0005
+T1055,Privilege Escalation,TA0004
+T1056,Collection,TA0009
+T1056,Credential Access,TA0006
+T1057,Discovery,TA0007
+T1059,Execution,TA0002
+T1068,Privilege Escalation,TA0004
+T1069,Discovery,TA0007
+T1070,Defense Evasion,TA0005
+T1071,Command and Control,TA0011
+T1072,Execution,TA0002
+T1072,Lateral Movement,TA0008
+T1074,Collection,TA0009
+T1078,Defense Evasion,TA0005
+T1078,Initial Access,TA0001
+T1078,Persistence,TA0003
+T1078,Privilege Escalation,TA0004
+T1080,Lateral Movement,TA0008
+T1082,Discovery,TA0007
+T1083,Discovery,TA0007
+T1087,Discovery,TA0007
+T1090,Command and Control,TA0011
+T1091,Initial Access,TA0001
+T1091,Lateral Movement,TA0008
+T1092,Command and Control,TA0011
+T1095,Command and Control,TA0011
+T1098,Persistence,TA0003
+T1098,Privilege Escalation,TA0004
+T1102,Command and Control,TA0011
+T1104,Command and Control,TA0011
+T1105,Command and Control,TA0011
+T1106,Execution,TA0002
+T1110,Credential Access,TA0006
+T1111,Credential Access,TA0006
+T1112,Persistence,TA0003
+T1113,Collection,TA0009
+T1114,Collection,TA0009
+T1115,Collection,TA0009
+T1119,Collection,TA0009
+T1120,Discovery,TA0007
+T1123,Collection,TA0009
+T1124,Discovery,TA0007
+T1125,Collection,TA0009
+T1127,Defense Evasion,TA0005
+T1127,Execution,TA0002
+T1129,Execution,TA0002
+T1132,Command and Control,TA0011
+T1133,Initial Access,TA0001
+T1133,Persistence,TA0003
+T1134,Defense Evasion,TA0005
+T1134,Privilege Escalation,TA0004
+T1135,Discovery,TA0007
+T1136,Persistence,TA0003
+T1137,Persistence,TA0003
+T1140,Defense Evasion,TA0005
+T1176,Persistence,TA0003
+T1185,Collection,TA0009
+T1187,Credential Access,TA0006
+T1189,Initial Access,TA0001
+T1190,Initial Access,TA0001
+T1195,Initial Access,TA0001
+T1197,Defense Evasion,TA0005
+T1197,Execution,TA0002
+T1197,Persistence,TA0003
+T1199,Initial Access,TA0001
+T1200,Initial Access,TA0001
+T1201,Discovery,TA0007
+T1202,Defense Evasion,TA0005
+T1203,Execution,TA0002
+T1204,Execution,TA0002
+T1205,Command and Control,TA0011
+T1205,Defense Evasion,TA0005
+T1205,Persistence,TA0003
+T1210,Lateral Movement,TA0008
+T1211,Defense Evasion,TA0005
+T1212,Credential Access,TA0006
+T1213,Collection,TA0009
+T1216,Defense Evasion,TA0005
+T1217,Discovery,TA0007
+T1218,Defense Evasion,TA0005
+T1219,Command and Control,TA0011
+T1220,Defense Evasion,TA0005
+T1221,Defense Evasion,TA0005
+T1480,Defense Evasion,TA0005
+T1482,Discovery,TA0007
+T1484,Privilege Escalation,TA0004
+T1485,Impact,TA0040
+T1486,Impact,TA0040
+T1489,Impact,TA0040
+T1490,Impact,TA0040
+T1491,Impact,TA0040
+T1495,Impact,TA0040
+T1496,Impact,TA0040
+T1497,Defense Evasion,TA0005
+T1497,Discovery,TA0007
+T1498,Impact,TA0040
+T1499,Impact,TA0040
+T1505,Persistence,TA0003
+T1518,Discovery,TA0007
+T1525,Persistence,TA0003
+T1526,Discovery,TA0007
+T1528,Credential Access,TA0006
+T1529,Impact,TA0040
+T1530,Collection,TA0009
+T1531,Impact,TA0040
+T1534,Lateral Movement,TA0008
+T1535,Defense Evasion,TA0005
+T1537,Exfiltration,TA0010
+T1538,Discovery,TA0007
+T1539,Credential Access,TA0006
+T1542,Defense Evasion,TA0005
+T1542,Persistence,TA0003
+T1543,Persistence,TA0003
+T1543,Privilege Escalation,TA0004
+T1546,Persistence,TA0003
+T1546,Privilege Escalation,TA0004
+T1547,Persistence,TA0003
+T1547,Privilege Escalation,TA0004
+T1548,Privilege Escalation,TA0004
+T1550,Lateral Movement,TA0008
+T1552,Credential Access,TA0006
+T1554,Persistence,TA0003
+T1555,Credential Access,TA0006
+T1556,Credential Access,TA0006
+T1556,Persistence,TA0003
+T1557,Collection,TA0009
+T1557,Credential Access,TA0006
+T1558,Credential Access,TA0006
+T1559,Execution,TA0002
+T1560,Collection,TA0009
+T1561,Impact,TA0040
+T1563,Lateral Movement,TA0008
+T1564,Defense Evasion,TA0005
+T1565,Impact,TA0040
+T1566,Initial Access,TA0001
+T1567,Exfiltration,TA0010
+T1568,Command and Control,TA0011
+T1569,Execution,TA0002
+T1570,Lateral Movement,TA0008
+T1571,Command and Control,TA0011
+T1572,Command and Control,TA0011
+T1573,Command and Control,TA0011
+T1574,Defense Evasion,TA0005
+T1574,Execution,TA0002
+T1580,Discovery,TA0007
+T1583,Resource Development,TA0042
+T1584,Resource Development,TA0042
+T1585,Resource Development,TA0042
+T1586,Resource Development,TA0042
+T1587,Resource Development,TA0042
+T1588,Resource Development,TA0042
+T1589,Reconnaissance,TA0043
+T1590,Reconnaissance,TA0043
+T1591,Reconnaissance,TA0043
+T1592,Reconnaissance,TA0043
+T1593,Reconnaissance,TA0043
+T1594,Reconnaissance,TA0043
+T1595,Reconnaissance,TA0043
+T1596,Reconnaissance,TA0043
+T1597,Reconnaissance,TA0043
+T1598,Reconnaissance,TA0043
+T1602,Collection,TA0009
+T1606,Credential Access,TA0006
+T1608,Resource Development,TA0042
+T1609,Execution,TA0002
+T1610,Execution,TA0002
+T1611,Privilege Escalation,TA0004
+T1612,Defense Evasion,TA0005
+T1613,Discovery,TA0007
+T1614,Discovery,TA0007
+T1615,Discovery,TA0007
+T1619,Discovery,TA0007
+T1620,Defense Evasion,TA0005
+T1621,Credential Access,TA0006
+T1622,Defense Evasion,TA0005
+T1622,Discovery,TA0007
+T1648,Execution,TA0002
+T1649,Credential Access,TA0006
+T1650,Resource Development,TA0042
+T1651,Execution,TA0002
+T1652,Discovery,TA0007
+T1653,Persistence,TA0003
+T1654,Discovery,TA0007
+T1657,Impact,TA0040
+T1659,Command and Control,TA0011
+T1659,Initial Access,TA0001
+T1665,Command and Control,TA0011
+T1667,Impact,TA0040
+T1668,Persistence,TA0003
+T1669,Initial Access,TA0001
+T1671,Persistence,TA0003
+T1673,Discovery,TA0007
+T1674,Execution,TA0002
+T1675,Execution,TA0002
+T1677,Execution,TA0002
+T1678,Defense Evasion,TA0005
+T1679,Defense Evasion,TA0005
+T1680,Discovery,TA0007
+T1681,Reconnaissance,TA0043
+T1682,Reconnaissance,TA0043
+T1683,Resource Development,TA0042
+T1684,Defense Evasion,TA0005
+T1696,Defense Evasion,TA0005
+T1697,Credential Access,TA0006
+T1698,Execution,TA0002
+T1699,Execution,TA0002
+T1700,Exfiltration,TA0010
