@@ -1,4 +1,13 @@
-# Web Application Plan: Attack Path Explorer
+# AttackCast — Web Application Plan
+
+> **AttackCast** — where the intrusion goes next, ranked by evidence.
+
+The name is deliberate. Weather forecasting is the culturally understood
+model for probabilistic, multi-outcome prediction: nobody hears "70% chance
+of rain" and expects certainty. This model's defining property is top-1 0.369
+against top-5 0.756, with 6.02 plausible successors per context, so a name
+built on forecasting states the honest framing before anyone asks. A name like
+"Attack Predictor" would have promised what the evidence does not support.
 
 Status: planned, not started. Decisions here are recorded in DECISIONS_LOG as
 DEC-25.
@@ -117,7 +126,7 @@ every script fits a model in memory and discards it.
   sequence MRR**, so the served model is provably the evaluated model. Without
   this the application's numbers are unverifiable.
 
-### Stage 2 — FastAPI backend
+### Stage 2 — FastAPI backend  **[DONE 2026-10-26]**
 
 | Endpoint | Purpose |
 | :--- | :--- |
@@ -243,3 +252,63 @@ secondary.
   covered every permutation, with a caveat that it carries no measured accuracy.
 - **Technique catalogue** for the picker: 109 entries with names, tactics,
   training frequency and whether the model can predict them.
+
+
+---
+
+## 7. Stage 2 outcome (2026-10-26)
+
+Built `src/serve/app.py` and `tests/test_api.py` (62 checks, all passing).
+Run it with:
+
+```bash
+python -m uvicorn src.serve.app:app --reload   # http://127.0.0.1:8000/docs
+```
+
+`.claude/launch.json` carries an `attackcast-api` configuration for the same
+thing.
+
+### Endpoints
+
+| Method | Path | Purpose |
+| :--- | :--- | :--- |
+| GET | `/api/health` | liveness, class count, calibration temperature |
+| GET | `/api/meta` | full model card including the negative results |
+| POST | `/api/predict` | ranked candidates with evidence, context and caveats |
+| POST | `/api/stage` | 14-tactic kill-chain localisation |
+| POST | `/api/reconstruct` | beam search over orderings |
+| GET | `/api/catalogue` | 109 techniques with names and tactics, for the picker |
+| GET | `/api/eda` | chart index with kind and row counts |
+| GET | `/api/eda/{id}` | chart data as records |
+| GET | `/api/eda/{id}/image` | pre-rendered PNG fallback |
+
+Artifacts load once in the lifespan handler, so the process fails fast at
+startup if they are missing and no request pays for model loading. CORS is open
+only to the Vite dev server origins. The built frontend mounts at `/` in Stage 5
+and is mounted last so it can never shadow an `/api` route.
+
+### Disclosure behaviours, enforced by tests
+
+- Every prediction returns `caveats` and a `context` block with the back-off
+  level, the first- and second-order support counts, and the techniques excluded
+  as already observed. Exclusions are reported rather than silently applied.
+- `context.confidence` is derived from **training support**, not from the
+  probability, because temperature scaling fixes average calibration and not
+  individual sparse contexts.
+- `context.source` declares the first-order fallback whenever fewer than two
+  techniques are supplied, and the tests assert that those probabilities equal
+  the empirical transition rates candidate by candidate.
+- `/api/stage` carries a caveat stating that tactics were measured not to
+  improve accuracy; `/api/reconstruct` carries one stating it has no measured
+  accuracy at all.
+- Submitting only unknown techniques returns 422 with a pointer to
+  `/api/catalogue` rather than a confident answer over nothing.
+
+### One defect found and fixed
+
+The EDA chart classifier originally treated any CSV with a leading unnamed
+column as heatmap data, which wrongly marked the Zipf curve, the top-20 table
+and three others as matrices. A matrix is now identified by its column names
+largely coinciding with its row labels, which holds for the three transition and
+co-occurrence matrices and for nothing else. Without this the Explore tab would
+have tried to render a frequency curve as a heatmap.

@@ -1,0 +1,12 @@
+{
+ "method": "temperature scaling on out-of-fold log-probabilities",
+ "temperature": 1.1573,
+ "nll_before": 2.1963,
+ "nll_after": 2.1713,
+ "ece_before": 0.0808,
+ "ece_after": 0.0167,
+ "mean_confidence_before": 0.468,
+ "mean_confidence_after": 0.4038,
+ "observed_accuracy": 0.3872,
+ "n_out_of_fold_examples": 11105
+}

@@ -1,0 +1,84 @@
+{
+  "application": "AttackCast",
+  "tagline": "where the intrusion goes next, ranked by evidence",
+  "model": "LightGBM multiclass softprob over prefix-presence features",
+  "built_at": "2026-10-26T10:11:27+00:00",
+  "trained_on": "sightings_v2 development set (original train + val splits)",
+  "sequences": 2178,
+  "examples": 11105,
+  "label_classes": 101,
+  "feature_count": 546,
+  "hyperparameters": {
+    "num_leaves": 31,
+    "min_child_samples": 10,
+    "reg_lambda": 1.0,
+    "n_estimators": 101
+  },
+  "evaluation": {
+    "protocol": "5-fold StratifiedGroupKFold over the development set, grouped by sequence, stratified by length (DEC-18); metrics are sequence-balanced",
+    "expected_seq_mrr": 0.5386,
+    "measured": {
+      "seq_mrr": 0.5385804203249356,
+      "seq_top_1": 0.3694431108102415,
+      "seq_top_3": 0.63602335666109,
+      "seq_top_5": 0.7559387214569909,
+      "seq_macro_recall": 0.22994173440520713,
+      "seq_macro_f1": 0.22686661933498922,
+      "seq_mrr_sd_across_folds": 0.01321531920868416,
+      "n_folds": 5,
+      "per_fold_seq_mrr": [
+        0.5534,
+        0.5251,
+        0.5507,
+        0.5374,
+        0.5264
+      ]
+    },
+    "paired_reference": {
+      "vs_markov2_seq_mrr_diff": -0.0898,
+      "ci": [
+        -0.0967,
+        -0.083
+      ],
+      "note": "Markov-2 minus LightGBM; LightGBM is ahead and the CI excludes zero"
+    }
+  },
+  "calibration": {
+    "method": "temperature scaling on out-of-fold log-probabilities",
+    "temperature": 1.1573,
+    "nll_before": 2.1963,
+    "nll_after": 2.1713,
+    "ece_before": 0.0808,
+    "ece_after": 0.0167,
+    "mean_confidence_before": 0.468,
+    "mean_confidence_after": 0.4038,
+    "observed_accuracy": 0.3872,
+    "n_out_of_fold_examples": 11105
+  },
+  "masking": {
+    "enabled": true,
+    "reason": "DEC-17: first-occurrence deduplication makes an already observed technique an impossible target"
+  },
+  "components": {
+    "ranking": "lightgbm_model.joblib",
+    "explanation_transitions": "markov.joblib",
+    "explanation_rules": "prefixspan_rules.json",
+    "stage_display": "tactic_map.json"
+  },
+  "known_negative_results": [
+    "Mined pattern features add nothing to the ranking (-0.0059); DEC-19",
+    "Tactic abstraction does not improve ranking (+0.0013, not replicated); DEC-20",
+    "Graph/Node2Vec, tactic and interaction features add +0.0012, CI straddles zero; DEC-21",
+    "Fixed-weight ensembling with Markov-2 gains +0.0005; DEC-19"
+  ],
+  "caveats": [
+    "Predictions rank the next technique in *reported* order, which is not established to be execution order (DEC-05: ordering is non-random at p=0.005, but non-random is not chronological).",
+    "Several next techniques are usually plausible: a reused two-technique context is followed by 6.02 distinct techniques on average. Treat the ranked list as a shortlist, not a verdict.",
+    "Top-1 accuracy is 0.369; top-5 is 0.756. Read the top five, not the top one.",
+    "Techniques already present in the prefix are excluded, because first-occurrence deduplication (DEC-03) makes them impossible targets. This is a property of the training data, not of real attacker behaviour.",
+    "Trained on 2,178 incident sequences from the CTID sightings data. Not validated on any live enterprise environment.",
+    "The raw model is over-confident; probabilities are temperature-scaled on out-of-fold predictions before display. Ranking is what the evaluation measured, so prefer rank and the observed transition counts over the probability when judging a candidate.",
+    "At least two observed techniques are required for the learned model. A single technique falls back to the first-order transition model, because every training prefix has length 2 or more."
+  ],
+  "test_data_loaded": false
+}

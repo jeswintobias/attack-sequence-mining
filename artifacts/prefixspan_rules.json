@@ -1,0 +1,3131 @@
+[
+ {
+  "antecedent": [
+   "T1021",
+   "T1027"
+  ],
+  "consequent": "T1047",
+  "confidence": 1.0,
+  "support": 859
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1027",
+   "T1047"
+  ],
+  "consequent": "T1059",
+  "confidence": 1.0,
+  "support": 859
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1027"
+  ],
+  "consequent": "T1059",
+  "confidence": 1.0,
+  "support": 859
+ },
+ {
+  "antecedent": [
+   "T1001"
+  ],
+  "consequent": "T1059",
+  "confidence": 1.0,
+  "support": 323
+ },
+ {
+  "antecedent": [
+   "T1001",
+   "T1059"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 323
+ },
+ {
+  "antecedent": [
+   "T1001"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 323
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1027",
+   "T1055"
+  ],
+  "consequent": "T1059",
+  "confidence": 1.0,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1027",
+   "T1055"
+  ],
+  "consequent": "T1074",
+  "confidence": 1.0,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1047",
+   "T1055"
+  ],
+  "consequent": "T1059",
+  "confidence": 1.0,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1047",
+   "T1055"
+  ],
+  "consequent": "T1074",
+  "confidence": 1.0,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1055",
+   "T1059"
+  ],
+  "consequent": "T1074",
+  "confidence": 1.0,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1047",
+   "T1055"
+  ],
+  "consequent": "T1059",
+  "confidence": 1.0,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1047",
+   "T1055"
+  ],
+  "consequent": "T1074",
+  "confidence": 1.0,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1001",
+   "T1059",
+   "T1132"
+  ],
+  "consequent": "T1140",
+  "confidence": 1.0,
+  "support": 205
+ },
+ {
+  "antecedent": [
+   "T1001",
+   "T1059",
+   "T1132"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 205
+ },
+ {
+  "antecedent": [
+   "T1001",
+   "T1059",
+   "T1140"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 205
+ },
+ {
+  "antecedent": [
+   "T1001",
+   "T1132"
+  ],
+  "consequent": "T1140",
+  "confidence": 1.0,
+  "support": 205
+ },
+ {
+  "antecedent": [
+   "T1001",
+   "T1132",
+   "T1140"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 205
+ },
+ {
+  "antecedent": [
+   "T1001",
+   "T1132"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 205
+ },
+ {
+  "antecedent": [
+   "T1001",
+   "T1140"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 205
+ },
+ {
+  "antecedent": [
+   "T1547",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 1.0,
+  "support": 160
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1087",
+   "T1018"
+  ],
+  "consequent": "T1016",
+  "confidence": 1.0,
+  "support": 130
+ },
+ {
+  "antecedent": [
+   "T1560",
+   "T1112",
+   "T1036"
+  ],
+  "consequent": "T1056",
+  "confidence": 1.0,
+  "support": 125
+ },
+ {
+  "antecedent": [
+   "T1112",
+   "T1546",
+   "T1036"
+  ],
+  "consequent": "T1056",
+  "confidence": 1.0,
+  "support": 124
+ },
+ {
+  "antecedent": [
+   "T1546",
+   "T1036"
+  ],
+  "consequent": "T1056",
+  "confidence": 1.0,
+  "support": 124
+ },
+ {
+  "antecedent": [
+   "T1560",
+   "T1112",
+   "T1546"
+  ],
+  "consequent": "T1036",
+  "confidence": 1.0,
+  "support": 124
+ },
+ {
+  "antecedent": [
+   "T1560",
+   "T1112",
+   "T1546"
+  ],
+  "consequent": "T1056",
+  "confidence": 1.0,
+  "support": 124
+ },
+ {
+  "antecedent": [
+   "T1560",
+   "T1546"
+  ],
+  "consequent": "T1036",
+  "confidence": 1.0,
+  "support": 124
+ },
+ {
+  "antecedent": [
+   "T1560",
+   "T1546",
+   "T1036"
+  ],
+  "consequent": "T1056",
+  "confidence": 1.0,
+  "support": 124
+ },
+ {
+  "antecedent": [
+   "T1560",
+   "T1546"
+  ],
+  "consequent": "T1056",
+  "confidence": 1.0,
+  "support": 124
+ },
+ {
+  "antecedent": [
+   "T1132",
+   "T1001"
+  ],
+  "consequent": "T1059",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1132",
+   "T1001",
+   "T1059"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1132",
+   "T1001"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1132",
+   "T1059"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1140",
+   "T1001"
+  ],
+  "consequent": "T1059",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1140",
+   "T1001",
+   "T1059"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1140",
+   "T1001"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1140",
+   "T1132"
+  ],
+  "consequent": "T1001",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1140",
+   "T1132",
+   "T1001"
+  ],
+  "consequent": "T1059",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1140",
+   "T1132",
+   "T1001"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1140",
+   "T1132"
+  ],
+  "consequent": "T1059",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1140",
+   "T1132",
+   "T1059"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1140",
+   "T1132"
+  ],
+  "consequent": "T1218",
+  "confidence": 1.0,
+  "support": 118
+ },
+ {
+  "antecedent": [
+   "T1016",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 1.0,
+  "support": 96
+ },
+ {
+  "antecedent": [
+   "T1018",
+   "T1016",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 1.0,
+  "support": 96
+ },
+ {
+  "antecedent": [
+   "T1087",
+   "T1016",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 1.0,
+  "support": 96
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1546",
+   "T1036"
+  ],
+  "consequent": "T1056",
+  "confidence": 1.0,
+  "support": 95
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1560",
+   "T1546"
+  ],
+  "consequent": "T1036",
+  "confidence": 1.0,
+  "support": 95
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1560",
+   "T1546"
+  ],
+  "consequent": "T1056",
+  "confidence": 1.0,
+  "support": 95
+ },
+ {
+  "antecedent": [
+   "T1547",
+   "T1574",
+   "T1070"
+  ],
+  "consequent": "T1106",
+  "confidence": 1.0,
+  "support": 93
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1016",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 1.0,
+  "support": 86
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1018",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 1.0,
+  "support": 86
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1087",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 1.0,
+  "support": 86
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1547",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 1.0,
+  "support": 86
+ },
+ {
+  "antecedent": [
+   "T1053",
+   "T1018"
+  ],
+  "consequent": "T1016",
+  "confidence": 1.0,
+  "support": 82
+ },
+ {
+  "antecedent": [
+   "T1053",
+   "T1087",
+   "T1018"
+  ],
+  "consequent": "T1016",
+  "confidence": 1.0,
+  "support": 82
+ },
+ {
+  "antecedent": [
+   "T1091",
+   "T1547",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 1.0,
+  "support": 82
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1547",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 1.0,
+  "support": 82
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1053",
+   "T1018"
+  ],
+  "consequent": "T1016",
+  "confidence": 1.0,
+  "support": 80
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1564",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 1.0,
+  "support": 79
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1053",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 1.0,
+  "support": 78
+ },
+ {
+  "antecedent": [
+   "T1055",
+   "T1087",
+   "T1018"
+  ],
+  "consequent": "T1016",
+  "confidence": 1.0,
+  "support": 70
+ },
+ {
+  "antecedent": [
+   "T1070",
+   "T1547",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 1.0,
+  "support": 67
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1564",
+   "T1106"
+  ],
+  "consequent": "T1091",
+  "confidence": 1.0,
+  "support": 63
+ },
+ {
+  "antecedent": [
+   "T1070",
+   "T1204",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 1.0,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1546",
+   "T1036"
+  ],
+  "consequent": "T1056",
+  "confidence": 1.0,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1560",
+   "T1546"
+  ],
+  "consequent": "T1036",
+  "confidence": 1.0,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1560",
+   "T1546"
+  ],
+  "consequent": "T1056",
+  "confidence": 1.0,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1546",
+   "T1036",
+   "T1204"
+  ],
+  "consequent": "T1571",
+  "confidence": 1.0,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1560",
+   "T1546",
+   "T1204"
+  ],
+  "consequent": "T1571",
+  "confidence": 1.0,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1027",
+   "T1047"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.998836,
+  "support": 858
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1027",
+   "T1059"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.998836,
+  "support": 858
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1027"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.998836,
+  "support": 858
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1047",
+   "T1059"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.998836,
+  "support": 858
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1047"
+  ],
+  "consequent": "T1059",
+  "confidence": 0.997677,
+  "support": 859
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1047",
+   "T1059"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.997674,
+  "support": 858
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1059",
+   "T1546"
+  ],
+  "consequent": "T1547",
+  "confidence": 0.997093,
+  "support": 343
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1047"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.996516,
+  "support": 858
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1055"
+  ],
+  "consequent": "T1059",
+  "confidence": 0.99635,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1055"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.99635,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1047"
+  ],
+  "consequent": "T1059",
+  "confidence": 0.99537,
+  "support": 860
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1132",
+   "T1140"
+  ],
+  "consequent": "T1218",
+  "confidence": 0.995146,
+  "support": 205
+ },
+ {
+  "antecedent": [
+   "T1132",
+   "T1140"
+  ],
+  "consequent": "T1218",
+  "confidence": 0.995146,
+  "support": 205
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1059"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.994206,
+  "support": 858
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1546"
+  ],
+  "consequent": "T1547",
+  "confidence": 0.994203,
+  "support": 343
+ },
+ {
+  "antecedent": [
+   "T1087",
+   "T1018"
+  ],
+  "consequent": "T1016",
+  "confidence": 0.993243,
+  "support": 147
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1047"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.993056,
+  "support": 858
+ },
+ {
+  "antecedent": [
+   "T1047",
+   "T1055"
+  ],
+  "consequent": "T1059",
+  "confidence": 0.99278,
+  "support": 275
+ },
+ {
+  "antecedent": [
+   "T1047",
+   "T1055",
+   "T1059"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.992727,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1087"
+  ],
+  "consequent": "T1016",
+  "confidence": 0.992366,
+  "support": 130
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1087"
+  ],
+  "consequent": "T1018",
+  "confidence": 0.992366,
+  "support": 130
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1132"
+  ],
+  "consequent": "T1140",
+  "confidence": 0.990385,
+  "support": 206
+ },
+ {
+  "antecedent": [
+   "T1087",
+   "T1018",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 0.989691,
+  "support": 96
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1112",
+   "T1546"
+  ],
+  "consequent": "T1036",
+  "confidence": 0.989583,
+  "support": 95
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1112",
+   "T1546"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.989583,
+  "support": 95
+ },
+ {
+  "antecedent": [
+   "T1132"
+  ],
+  "consequent": "T1218",
+  "confidence": 0.987768,
+  "support": 323
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1053",
+   "T1087"
+  ],
+  "consequent": "T1016",
+  "confidence": 0.987654,
+  "support": 80
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1053",
+   "T1087"
+  ],
+  "consequent": "T1018",
+  "confidence": 0.987654,
+  "support": 80
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1091",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.9875,
+  "support": 79
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1055",
+   "T1087"
+  ],
+  "consequent": "T1016",
+  "confidence": 0.985714,
+  "support": 69
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1055",
+   "T1087"
+  ],
+  "consequent": "T1018",
+  "confidence": 0.985714,
+  "support": 69
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1132"
+  ],
+  "consequent": "T1218",
+  "confidence": 0.985577,
+  "support": 205
+ },
+ {
+  "antecedent": [
+   "T1047",
+   "T1055"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.98556,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1560",
+   "T1112",
+   "T1204"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.984375,
+  "support": 63
+ },
+ {
+  "antecedent": [
+   "T1070",
+   "T1091",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.984127,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1112",
+   "T1546",
+   "T1204"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.984127,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1112",
+   "T1546"
+  ],
+  "consequent": "T1036",
+  "confidence": 0.984127,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1112",
+   "T1546"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.984127,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1546",
+   "T1056",
+   "T1204"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.984127,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1546",
+   "T1204"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.984127,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1204",
+   "T1564"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.983871,
+  "support": 61
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1204",
+   "T1564"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.983871,
+  "support": 61
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1546"
+  ],
+  "consequent": "T1547",
+  "confidence": 0.980447,
+  "support": 351
+ },
+ {
+  "antecedent": [
+   "T1087",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 0.979798,
+  "support": 97
+ },
+ {
+  "antecedent": [
+   "T1018",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 0.979592,
+  "support": 96
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.977528,
+  "support": 87
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1055",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 0.976331,
+  "support": 165
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1055"
+  ],
+  "consequent": "T1059",
+  "confidence": 0.976027,
+  "support": 285
+ },
+ {
+  "antecedent": [
+   "T1055",
+   "T1087"
+  ],
+  "consequent": "T1016",
+  "confidence": 0.972222,
+  "support": 70
+ },
+ {
+  "antecedent": [
+   "T1055",
+   "T1087"
+  ],
+  "consequent": "T1018",
+  "confidence": 0.972222,
+  "support": 70
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1027",
+   "T1055"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.970696,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1047",
+   "T1055"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.970696,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1055",
+   "T1059"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.970696,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1055",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.970696,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1047",
+   "T1055"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.970696,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1055",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.970696,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1047",
+   "T1055",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.970696,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1055",
+   "T1059",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.970696,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1018"
+  ],
+  "consequent": "T1016",
+  "confidence": 0.970149,
+  "support": 130
+ },
+ {
+  "antecedent": [
+   "T1560",
+   "T1036",
+   "T1204"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.969231,
+  "support": 63
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1546"
+  ],
+  "consequent": "T1036",
+  "confidence": 0.96875,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1546"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.96875,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1055"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.967153,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1055",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.967153,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1053",
+   "T1087"
+  ],
+  "consequent": "T1016",
+  "confidence": 0.964706,
+  "support": 82
+ },
+ {
+  "antecedent": [
+   "T1053",
+   "T1087"
+  ],
+  "consequent": "T1018",
+  "confidence": 0.964706,
+  "support": 82
+ },
+ {
+  "antecedent": [
+   "T1047",
+   "T1055",
+   "T1059"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.963636,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1562",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 0.958904,
+  "support": 70
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1070",
+   "T1204"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.958904,
+  "support": 70
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1070",
+   "T1204"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.958904,
+  "support": 70
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1055",
+   "T1059"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.957895,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1047",
+   "T1055"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.956679,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1560",
+   "T1056",
+   "T1204"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.954545,
+  "support": 63
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1091",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.954023,
+  "support": 83
+ },
+ {
+  "antecedent": [
+   "T1070",
+   "T1564",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.953125,
+  "support": 61
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1070",
+   "T1564"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.953125,
+  "support": 61
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1070",
+   "T1564"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.953125,
+  "support": 61
+ },
+ {
+  "antecedent": [
+   "T1047"
+  ],
+  "consequent": "T1059",
+  "confidence": 0.950464,
+  "support": 921
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1070"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.94898,
+  "support": 93
+ },
+ {
+  "antecedent": [
+   "T1547",
+   "T1574",
+   "T1204"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.945946,
+  "support": 70
+ },
+ {
+  "antecedent": [
+   "T1547",
+   "T1574",
+   "T1204"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.945946,
+  "support": 70
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1055",
+   "T1018"
+  ],
+  "consequent": "T1016",
+  "confidence": 0.945205,
+  "support": 69
+ },
+ {
+  "antecedent": [
+   "T1091",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.943182,
+  "support": 83
+ },
+ {
+  "antecedent": [
+   "T1027"
+  ],
+  "consequent": "T1059",
+  "confidence": 0.942777,
+  "support": 1005
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 0.937037,
+  "support": 253
+ },
+ {
+  "antecedent": [
+   "T1047",
+   "T1059"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.935939,
+  "support": 862
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1055"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.934932,
+  "support": 273
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1204"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.933333,
+  "support": 70
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1204"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.933333,
+  "support": 70
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1546"
+  ],
+  "consequent": "T1036",
+  "confidence": 0.931373,
+  "support": 95
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1546"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.931373,
+  "support": 95
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1055",
+   "T1059"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.929825,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1560",
+   "T1112"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.929577,
+  "support": 66
+ },
+ {
+  "antecedent": [
+   "T1112",
+   "T1546"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.919708,
+  "support": 126
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1055",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.915129,
+  "support": 248
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1057",
+   "T1106"
+  ],
+  "consequent": "T1055",
+  "confidence": 0.911243,
+  "support": 154
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1070",
+   "T1564"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.910448,
+  "support": 61
+ },
+ {
+  "antecedent": [
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.909605,
+  "support": 161
+ },
+ {
+  "antecedent": [
+   "T1055",
+   "T1018"
+  ],
+  "consequent": "T1016",
+  "confidence": 0.909091,
+  "support": 70
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1204",
+   "T1564"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.907692,
+  "support": 59
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1055"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.907534,
+  "support": 265
+ },
+ {
+  "antecedent": [
+   "T1112",
+   "T1546"
+  ],
+  "consequent": "T1036",
+  "confidence": 0.905109,
+  "support": 124
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1057",
+   "T1106"
+  ],
+  "consequent": "T1055",
+  "confidence": 0.904564,
+  "support": 218
+ },
+ {
+  "antecedent": [
+   "T1547",
+   "T1574",
+   "T1564"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.9,
+  "support": 63
+ },
+ {
+  "antecedent": [
+   "T1547",
+   "T1574",
+   "T1564"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.9,
+  "support": 63
+ },
+ {
+  "antecedent": [
+   "T1053",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 0.89899,
+  "support": 89
+ },
+ {
+  "antecedent": [
+   "T1140",
+   "T1059"
+  ],
+  "consequent": "T1218",
+  "confidence": 0.896296,
+  "support": 121
+ },
+ {
+  "antecedent": [
+   "T1070",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.894737,
+  "support": 68
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1574"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.892473,
+  "support": 83
+ },
+ {
+  "antecedent": [
+   "T1047"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.891641,
+  "support": 864
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1106",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.890728,
+  "support": 269
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1560",
+   "T1112"
+  ],
+  "consequent": "T1036",
+  "confidence": 0.887324,
+  "support": 63
+ },
+ {
+  "antecedent": [
+   "T1547",
+   "T1204",
+   "T1564"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.883212,
+  "support": 121
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1106",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.883117,
+  "support": 408
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1057",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.882716,
+  "support": 143
+ },
+ {
+  "antecedent": [
+   "T1087"
+  ],
+  "consequent": "T1018",
+  "confidence": 0.880952,
+  "support": 148
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1057",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.878205,
+  "support": 137
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1070",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.876812,
+  "support": 121
+ },
+ {
+  "antecedent": [
+   "T1140"
+  ],
+  "consequent": "T1218",
+  "confidence": 0.875,
+  "support": 329
+ },
+ {
+  "antecedent": [
+   "T1018"
+  ],
+  "consequent": "T1016",
+  "confidence": 0.875,
+  "support": 147
+ },
+ {
+  "antecedent": [
+   "T1087"
+  ],
+  "consequent": "T1016",
+  "confidence": 0.875,
+  "support": 147
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1560",
+   "T1112"
+  ],
+  "consequent": "T1546",
+  "confidence": 0.873239,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1204",
+   "T1106"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.871429,
+  "support": 61
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1560",
+   "T1204"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.868421,
+  "support": 66
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1140"
+  ],
+  "consequent": "T1218",
+  "confidence": 0.866109,
+  "support": 207
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1564"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.863014,
+  "support": 63
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1564"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.863014,
+  "support": 63
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1055",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.858621,
+  "support": 249
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1036",
+   "T1070"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.855172,
+  "support": 124
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1059"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.853731,
+  "support": 858
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1057",
+   "T1106"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.852071,
+  "support": 144
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1106",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.850962,
+  "support": 177
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1070",
+   "T1204"
+  ],
+  "consequent": "T1564",
+  "confidence": 0.849315,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1564",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.848552,
+  "support": 381
+ },
+ {
+  "antecedent": [
+   "T1057",
+   "T1055",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.842767,
+  "support": 134
+ },
+ {
+  "antecedent": [
+   "T1106",
+   "T1055",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.840909,
+  "support": 296
+ },
+ {
+  "antecedent": [
+   "T1547",
+   "T1574",
+   "T1204"
+  ],
+  "consequent": "T1564",
+  "confidence": 0.837838,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1027",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.83683,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1047",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.83683,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1059",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.83683,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.83683,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1047",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.83683,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1059",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.83683,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.83683,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1036",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.836158,
+  "support": 148
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1027",
+   "T1047"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.835856,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1027",
+   "T1059"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.835856,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1027"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.835856,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1047",
+   "T1059"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.835856,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1047",
+   "T1059"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.834884,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1057",
+   "T1070"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.834437,
+  "support": 126
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1047"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.833914,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1047",
+   "T1059",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.832947,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1059"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.831981,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1021",
+   "T1047"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.831019,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1047",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.831019,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1057",
+   "T1055"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.82716,
+  "support": 134
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1204"
+  ],
+  "consequent": "T1564",
+  "confidence": 0.826667,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1057",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.822857,
+  "support": 144
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1057",
+   "T1106"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.816568,
+  "support": 138
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1091",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.816425,
+  "support": 169
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.812217,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1091",
+   "T1036",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.809717,
+  "support": 200
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1091",
+   "T1036"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.808081,
+  "support": 240
+ },
+ {
+  "antecedent": [
+   "T1027"
+  ],
+  "consequent": "T1047",
+  "confidence": 0.807692,
+  "support": 861
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1057",
+   "T1091"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.807692,
+  "support": 126
+ },
+ {
+  "antecedent": [
+   "T1027"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.804878,
+  "support": 858
+ },
+ {
+  "antecedent": [
+   "T1057",
+   "T1055",
+   "T1091"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.798742,
+  "support": 127
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1106",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.796715,
+  "support": 388
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1091",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.795745,
+  "support": 187
+ },
+ {
+  "antecedent": [
+   "T1562",
+   "T1059",
+   "T1036"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.790323,
+  "support": 98
+ },
+ {
+  "antecedent": [
+   "T1562",
+   "T1106",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.789474,
+  "support": 90
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1055",
+   "T1091"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.782288,
+  "support": 212
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1564",
+   "T1036"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.781955,
+  "support": 208
+ },
+ {
+  "antecedent": [
+   "T1204",
+   "T1112",
+   "T1036"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.781609,
+  "support": 68
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.780899,
+  "support": 417
+ },
+ {
+  "antecedent": [
+   "T1047",
+   "T1059"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.779587,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1074"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.779587,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1036",
+   "T1070"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.77931,
+  "support": 113
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1546",
+   "T1036"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.778947,
+  "support": 74
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1546",
+   "T1056"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.778947,
+  "support": 74
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1560",
+   "T1546"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.778947,
+  "support": 74
+ },
+ {
+  "antecedent": [
+   "T1547",
+   "T1574",
+   "T1070"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.774194,
+  "support": 72
+ },
+ {
+  "antecedent": [
+   "T1547",
+   "T1574",
+   "T1070"
+  ],
+  "consequent": "T1204",
+  "confidence": 0.774194,
+  "support": 72
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1055",
+   "T1070"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.771863,
+  "support": 203
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1112",
+   "T1546"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.770833,
+  "support": 74
+ },
+ {
+  "antecedent": [
+   "T1091",
+   "T1106",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.769531,
+  "support": 197
+ },
+ {
+  "antecedent": [
+   "T1106",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.768559,
+  "support": 528
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1057",
+   "T1055"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.765432,
+  "support": 124
+ },
+ {
+  "antecedent": [
+   "T1562",
+   "T1055",
+   "T1059"
+  ],
+  "consequent": "T1564",
+  "confidence": 0.764045,
+  "support": 68
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1057",
+   "T1106"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.763314,
+  "support": 129
+ },
+ {
+  "antecedent": [
+   "T1112",
+   "T1036",
+   "T1204"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.761905,
+  "support": 64
+ },
+ {
+  "antecedent": [
+   "T1057",
+   "T1106",
+   "T1070"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.760736,
+  "support": 124
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1070",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.760417,
+  "support": 146
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1564",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.759099,
+  "support": 438
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1564",
+   "T1106"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.757951,
+  "support": 429
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1056",
+   "T1204"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.756098,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1053",
+   "T1018",
+   "T1016"
+  ],
+  "consequent": "T1562",
+  "confidence": 0.756098,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1053",
+   "T1018"
+  ],
+  "consequent": "T1562",
+  "confidence": 0.756098,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1053",
+   "T1087",
+   "T1016"
+  ],
+  "consequent": "T1562",
+  "confidence": 0.756098,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1053",
+   "T1087",
+   "T1018"
+  ],
+  "consequent": "T1562",
+  "confidence": 0.756098,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1070",
+   "T1106",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.753676,
+  "support": 205
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1070",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.753488,
+  "support": 162
+ },
+ {
+  "antecedent": [
+   "T1057",
+   "T1055",
+   "T1070"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.751553,
+  "support": 121
+ },
+ {
+  "antecedent": [
+   "T1562",
+   "T1059",
+   "T1564"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.75,
+  "support": 153
+ },
+ {
+  "antecedent": [
+   "T1057",
+   "T1106",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.75,
+  "support": 141
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1053",
+   "T1016"
+  ],
+  "consequent": "T1562",
+  "confidence": 0.75,
+  "support": 60
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1053",
+   "T1018"
+  ],
+  "consequent": "T1562",
+  "confidence": 0.75,
+  "support": 60
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1564"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.749351,
+  "support": 577
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1564",
+   "T1057"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.748837,
+  "support": 161
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1564",
+   "T1057"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.748837,
+  "support": 161
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1106",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.74732,
+  "support": 488
+ },
+ {
+  "antecedent": [
+   "T1053",
+   "T1016"
+  ],
+  "consequent": "T1562",
+  "confidence": 0.746988,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1112",
+   "T1036"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.746269,
+  "support": 100
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1070"
+  ],
+  "consequent": "T1204",
+  "confidence": 0.744898,
+  "support": 73
+ },
+ {
+  "antecedent": [
+   "T1055",
+   "T1106",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.744444,
+  "support": 67
+ },
+ {
+  "antecedent": [
+   "T1055",
+   "T1105"
+  ],
+  "consequent": "T1021",
+  "confidence": 0.743478,
+  "support": 171
+ },
+ {
+  "antecedent": [
+   "T1560",
+   "T1543",
+   "T1070"
+  ],
+  "consequent": "T1204",
+  "confidence": 0.741573,
+  "support": 66
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1036",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.741071,
+  "support": 166
+ },
+ {
+  "antecedent": [
+   "T1047"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.74097,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1053",
+   "T1087"
+  ],
+  "consequent": "T1562",
+  "confidence": 0.740741,
+  "support": 60
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1564",
+   "T1106"
+  ],
+  "consequent": "T1055",
+  "confidence": 0.740283,
+  "support": 419
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1564"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.735065,
+  "support": 566
+ },
+ {
+  "antecedent": [
+   "T1547",
+   "T1036",
+   "T1070"
+  ],
+  "consequent": "T1204",
+  "confidence": 0.734694,
+  "support": 72
+ },
+ {
+  "antecedent": [
+   "T1574",
+   "T1070"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.734694,
+  "support": 72
+ },
+ {
+  "antecedent": [
+   "T1106",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.733115,
+  "support": 673
+ },
+ {
+  "antecedent": [
+   "T1106",
+   "T1056",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.732558,
+  "support": 63
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1106",
+   "T1070"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.731293,
+  "support": 215
+ },
+ {
+  "antecedent": [
+   "T1021"
+  ],
+  "consequent": "T1047",
+  "confidence": 0.730347,
+  "support": 864
+ },
+ {
+  "antecedent": [
+   "T1021"
+  ],
+  "consequent": "T1059",
+  "confidence": 0.729501,
+  "support": 863
+ },
+ {
+  "antecedent": [
+   "T1053",
+   "T1087"
+  ],
+  "consequent": "T1562",
+  "confidence": 0.729412,
+  "support": 62
+ },
+ {
+  "antecedent": [
+   "T1057",
+   "T1106",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.727626,
+  "support": 187
+ },
+ {
+  "antecedent": [
+   "T1021"
+  ],
+  "consequent": "T1027",
+  "confidence": 0.72612,
+  "support": 859
+ },
+ {
+  "antecedent": [
+   "T1055",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.725962,
+  "support": 453
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1057",
+   "T1091"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.725714,
+  "support": 127
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1546"
+  ],
+  "consequent": "T1571",
+  "confidence": 0.72549,
+  "support": 74
+ },
+ {
+  "antecedent": [
+   "T1021"
+  ],
+  "consequent": "T1074",
+  "confidence": 0.725275,
+  "support": 858
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1091"
+  ],
+  "consequent": "T1070",
+  "confidence": 0.723666,
+  "support": 529
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1106",
+   "T1091"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.721854,
+  "support": 218
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1036",
+   "T1106"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.718254,
+  "support": 181
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1036",
+   "T1070"
+  ],
+  "consequent": "T1055",
+  "confidence": 0.717241,
+  "support": 104
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1057"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.716049,
+  "support": 174
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1036"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.715909,
+  "support": 252
+ },
+ {
+  "antecedent": [
+   "T1562",
+   "T1059",
+   "T1564"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.715686,
+  "support": 146
+ },
+ {
+  "antecedent": [
+   "T1027",
+   "T1059"
+  ],
+  "consequent": "T1568",
+  "confidence": 0.714428,
+  "support": 718
+ },
+ {
+  "antecedent": [
+   "T1036",
+   "T1070",
+   "T1204"
+  ],
+  "consequent": "T1564",
+  "confidence": 0.710843,
+  "support": 59
+ },
+ {
+  "antecedent": [
+   "T1091",
+   "T1070",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.70892,
+  "support": 151
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1057",
+   "T1055"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.708696,
+  "support": 163
+ },
+ {
+  "antecedent": [
+   "T1091",
+   "T1036",
+   "T1070"
+  ],
+  "consequent": "T1106",
+  "confidence": 0.708543,
+  "support": 141
+ },
+ {
+  "antecedent": [
+   "T1070",
+   "T1204",
+   "T1560"
+  ],
+  "consequent": "T1543",
+  "confidence": 0.707965,
+  "support": 80
+ },
+ {
+  "antecedent": [
+   "T1562",
+   "T1055",
+   "T1059"
+  ],
+  "consequent": "T1091",
+  "confidence": 0.707865,
+  "support": 63
+ },
+ {
+  "antecedent": [
+   "T1059",
+   "T1564",
+   "T1057"
+  ],
+  "consequent": "T1055",
+  "confidence": 0.706977,
+  "support": 152
+ },
+ {
+  "antecedent": [
+   "T1057",
+   "T1091",
+   "T1070"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.706897,
+  "support": 123
+ },
+ {
+  "antecedent": [
+   "T1546"
+  ],
+  "consequent": "T1547",
+  "confidence": 0.705765,
+  "support": 355
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1057",
+   "T1070"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.704301,
+  "support": 131
+ },
+ {
+  "antecedent": [
+   "T1091",
+   "T1036",
+   "T1070"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.703518,
+  "support": 140
+ },
+ {
+  "antecedent": [
+   "T1564",
+   "T1055",
+   "T1091"
+  ],
+  "consequent": "T1056",
+  "confidence": 0.7,
+  "support": 203
+ }
+]
