@@ -13,6 +13,17 @@
         "--reload"
       ],
       "port": 8000
+    },
+    {
+      "name": "attackcast-web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "frontend"
+      ],
+      "port": 5173
     }
   ]
 }

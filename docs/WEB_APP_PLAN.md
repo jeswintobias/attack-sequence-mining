@@ -136,7 +136,7 @@ every script fits a model in memory and discards it.
 | `GET /api/eda/{chart_id}` | serve the existing EDA CSVs as JSON |
 | `GET /api/meta` | model card: metrics, limitations, provenance |
 
-### Stage 3 — Frontend foundation
+### Stage 3 — Frontend foundation  **[DONE 2026-10-26]**
 
 Vite + React + TypeScript + Tailwind + shadcn/ui. Header tab switching between
 **Predict** and **Explore**. Design tokens, light and dark themes, typography
@@ -312,3 +312,82 @@ and three others as matrices. A matrix is now identified by its column names
 largely coinciding with its row labels, which holds for the three transition and
 co-occurrence matrices and for nothing else. Without this the Explore tab would
 have tried to render a frequency curve as a heatmap.
+
+
+---
+
+## 8. Stage 3 outcome (2026-10-26)
+
+`frontend/` holds a Vite 8 + React 19 + TypeScript + Tailwind 4 application.
+Typecheck is clean and the production build is 74 kB gzipped.
+
+```bash
+npm install --prefix frontend
+npm run dev --prefix frontend      # http://localhost:5173, proxies /api to :8000
+npm run build --prefix frontend    # dist/ is then served by FastAPI at /
+```
+
+`.claude/launch.json` carries `attackcast-api` and `attackcast-web`.
+
+### Design tokens come from a validated palette
+
+Colours are the reference data-visualisation palette, re-checked with the
+palette validator against these exact surfaces. All six checks pass in both
+modes; the light mode carries a contrast warning on aqua, yellow and magenta,
+all below 3:1 on the light surface.
+
+| Check | Light | Dark |
+| :--- | :--- | :--- |
+| Lightness band | pass | pass |
+| Chroma floor | pass | pass |
+| CVD separation (worst adjacent) | pass, dE 9.1 | pass, dE 8.4 |
+| Normal-vision floor | pass, dE 19.6 | pass, dE 19.3 |
+| Contrast vs surface | **warn** on 3 slots | pass |
+
+**Binding consequence for Stage 5:** any chart using the aqua, yellow or
+magenta slots must ship visible direct labels or a table view. That is the
+relief rule, not a preference.
+
+The accent is categorical slot 1, which is also the sequential hue, so the
+interface and the charts never disagree about what "primary" looks like.
+
+### Confidence is deliberately not a traffic light
+
+High confidence is not "good" and low confidence is not "danger", so a
+red/amber/green scale would miscommunicate. Confidence renders as three ordinal
+steps of the single sequential blue, no step lighter than 250 on the light
+surface or darker than 600 on dark, and the text label is always present so
+colour is reinforcement rather than the only channel. Amber and red are reserved
+strictly for warnings and errors, and every status use pairs an icon with a
+label because two status steps sit below 3:1 on light by design.
+
+### What was built
+
+- **Design tokens** in `src/styles.css`: surfaces, ink, hairlines, the accent,
+  the sequential ramp, confidence steps, status colours and the eight
+  categorical slots, defined for both themes and exposed to Tailwind as roles.
+- **Theme switching** with light, dark and system. The resolved theme is stamped
+  on `<html>` in `index.html` before first paint, so there is no flash; "system"
+  keeps following the OS while selected.
+- **Header** implementing the ARIA tabs pattern by hand: roving tabindex,
+  arrow-key, Home and End navigation, `aria-controls` wired to the panels.
+  Verified in the browser: ArrowLeft moves both selection and focus, End jumps
+  to the last tab.
+- **Typed API client** mirroring the Pydantic contract, with `ApiError`
+  normalising FastAPI's two `detail` shapes into one readable message and
+  carrying actionable hints (an unreachable API suggests the uvicorn command; a
+  503 suggests rebuilding artifacts).
+- **State components** for loading, error and empty, plus a skip link and
+  visible focus rings throughout.
+- **Model strip** in the chrome, fed by `/api/meta`: top-5 0.756, top-1 0.369,
+  MRR 0.5386, 101 classes, 2,178 sequences, and "test split never used". Putting
+  the model card in the chrome means no screen can show a prediction without its
+  provenance one glance away.
+- **A standing footer caveat** that predictions rank *reported* order and that
+  the shortlist, not the top answer, is the thing to read.
+
+### Verified in the browser
+
+Both themes render correctly, the Explore tab lists all 18 EDA charts with the
+right kind classification (3 heatmaps, 5 series, 10 tables), and the keyboard
+tab pattern behaves. The Forecast tab is an empty state until Stage 4.

@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+/* The theme toggle stamps data-theme on <html>; "system" is resolved to a
+   concrete value in index.html before first paint, so there is exactly one
+   source of truth and no flash of the wrong theme. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens.
+
+   Colours come from the validated reference palette and were re-checked with
+   the palette validator against these exact surfaces: all six checks pass in
+   both modes. Light mode carries a contrast WARN on aqua, yellow and magenta
+   (all below 3:1 on the light surface), which obligates visible direct labels
+   or a table view wherever those series appear.
+
+   Deliberate choice: confidence is NOT encoded on a red/amber/green scale.
+   High confidence is not "good" and low confidence is not "danger", so a
+   traffic light would miscommunicate. Confidence uses three ordinal steps of
+   the single sequential blue, and always ships its text label. Amber and red
+   are reserved strictly for warnings and errors.
+--------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  /* Surfaces and ink */
+  --ac-plane: #f9f9f7;
+  --ac-surface: #fcfcfb;
+  --ac-surface-raised: #ffffff;
+  --ac-ink: #0b0b0b;
+  --ac-ink-secondary: #52514e;
+  --ac-ink-muted: #898781;
+  --ac-hairline: #e1e0d9;
+  --ac-axis: #c3c2b7;
+  --ac-ring: rgb(11 11 11 / 0.1);
+
+  /* Brand accent = categorical slot 1, which is also the sequential hue, so
+     interface and charts never disagree about what "primary" looks like. */
+  --ac-accent: #2a78d6;
+  --ac-accent-hover: #256abf;
+  --ac-accent-ink: #ffffff;
+  --ac-accent-wash: #cde2fb;
+
+  /* Sequential blue ramp, for magnitude (heatmaps, probability bars) */
+  --ac-seq-100: #cde2fb;
+  --ac-seq-250: #86b6ef;
+  --ac-seq-400: #3987e5;
+  --ac-seq-450: #2a78d6;
+  --ac-seq-550: #1c5cab;
+  --ac-seq-650: #104281;
+  --ac-seq-700: #0d366b;
+
+  /* Confidence, ordinal: no step lighter than 250 on the light surface */
+  --ac-confidence-low: #86b6ef;
+  --ac-confidence-medium: #2a78d6;
+  --ac-confidence-high: #104281;
+
+  /* Status, fixed and never themed. Warning and serious are sub-3:1 on light
+     by design, so every status use pairs an icon with a text label. */
+  --ac-good: #0ca30c;
+  --ac-warning: #fab219;
+  --ac-serious: #ec835a;
+  --ac-critical: #d03b3b;
+
+  /* Categorical series, fixed order, never cycled */
+  --ac-series-1: #2a78d6;
+  --ac-series-2: #eb6834;
+  --ac-series-3: #1baf7a;
+  --ac-series-4: #eda100;
+  --ac-series-5: #e87ba4;
+  --ac-series-6: #008300;
+  --ac-series-7: #6250d6;
+  --ac-series-8: #e34948;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ac-plane: #0d0d0d;
+  --ac-surface: #1a1a19;
+  --ac-surface-raised: #222221;
+  --ac-ink: #f0efec;
+  --ac-ink-secondary: #c3c2b7;
+  --ac-ink-muted: #898781;
+  --ac-hairline: #2c2c2a;
+  --ac-axis: #383835;
+  --ac-ring: rgb(255 255 255 / 0.1);
+
+  --ac-accent: #3987e5;
+  --ac-accent-hover: #5598e7;
+  --ac-accent-ink: #0b0b0b;
+  --ac-accent-wash: #184f95;
+
+  --ac-seq-100: #0d366b;
+  --ac-seq-250: #184f95;
+  --ac-seq-400: #2a78d6;
+  --ac-seq-450: #3987e5;
+  --ac-seq-550: #5598e7;
+  --ac-seq-650: #86b6ef;
+  --ac-seq-700: #b7d3f6;
+
+  /* Dark ordinal: no step darker than 600 against the dark surface */
+  --ac-confidence-low: #184f95;
+  --ac-confidence-medium: #3987e5;
+  --ac-confidence-high: #86b6ef;
+
+  --ac-series-1: #3987e5;
+  --ac-series-2: #d95926;
+  --ac-series-3: #199e70;
+  --ac-series-4: #c98500;
+  --ac-series-5: #d55181;
+  --ac-series-6: #008300;
+  --ac-series-7: #9085e9;
+  --ac-series-8: #e66767;
+}
+
+/* Expose the tokens to Tailwind so utilities read as roles, not raw hex. */
+@theme inline {
+  --color-plane: var(--ac-plane);
+  --color-surface: var(--ac-surface);
+  --color-raised: var(--ac-surface-raised);
+  --color-ink: var(--ac-ink);
+  --color-ink-secondary: var(--ac-ink-secondary);
+  --color-ink-muted: var(--ac-ink-muted);
+  --color-hairline: var(--ac-hairline);
+  --color-axis: var(--ac-axis);
+  --color-accent: var(--ac-accent);
+  --color-accent-hover: var(--ac-accent-hover);
+  --color-accent-ink: var(--ac-accent-ink);
+  --color-accent-wash: var(--ac-accent-wash);
+  --color-good: var(--ac-good);
+  --color-warning: var(--ac-warning);
+  --color-serious: var(--ac-serious);
+  --color-critical: var(--ac-critical);
+  --color-confidence-low: var(--ac-confidence-low);
+  --color-confidence-medium: var(--ac-confidence-medium);
+  --color-confidence-high: var(--ac-confidence-high);
+
+  /* Monospace is reserved for technique identifiers. Prose never uses it. */
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  background-color: var(--ac-plane);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  background-color: var(--ac-plane);
+  color: var(--ac-ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* Visible focus everywhere; never removed, only styled. */
+:focus-visible {
+  outline: 2px solid var(--ac-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -32,3 +32,10 @@ Researach Papers/
 
 # CPTC-2018 Suricata alerts (external, 42MB; fetch from tudelft-cda-lab/SAGE)
 data/cptc_2018/
+
+# Serving model binaries (derived; rebuild with python src/serve/artifacts.py)
+artifacts/*.joblib
+
+# Frontend build output and dependencies
+frontend/node_modules/
+frontend/dist/
