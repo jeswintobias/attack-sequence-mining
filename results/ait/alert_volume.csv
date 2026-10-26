@@ -1,0 +1,9 @@
+scenario,size_mb,alerts,attack_tagged,tagged_pct,distinct_techniques
+fox,491.4,462523,58233,12.59,8
+harrison,632.9,583754,62749,10.749,8
+russellmitchell,45.3,41488,15048,36.271,8
+santos,145.4,126513,30188,23.862,8
+shaw,74.8,68539,28687,41.855,8
+wardbeck,96.6,88204,33000,37.413,8
+wheeler,650.7,603939,77042,12.757,8
+wilson,673.7,625303,98079,15.685,8

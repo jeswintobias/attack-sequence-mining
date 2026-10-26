@@ -1,0 +1,9 @@
+scenario,tagged_alerts,inside_attack_window,inside_pct,phases_with_attack_alerts,labelled_phases,derived_sequence_length
+fox,58605,31248,53.32,7,10,8
+harrison,63117,32744,51.88,9,10,8
+russellmitchell,15058,953,6.33,5,10,7
+santos,30194,1543,5.11,9,10,8
+shaw,28694,741,2.58,8,10,7
+wardbeck,33015,813,2.46,8,10,8
+wheeler,77387,31800,41.09,7,9,8
+wilson,98462,33460,33.98,8,10,8

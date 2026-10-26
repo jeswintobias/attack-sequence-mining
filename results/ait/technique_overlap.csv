@@ -1,0 +1,9 @@
+technique,ait_alert_count,in_sightings_vocabulary
+T1021,90,True
+T1055,2606,True
+T1078,277040,True
+T1083,730,True
+T1110,1169,False
+T1190,1068,False
+T1548,35,True
+T1595,121794,True
