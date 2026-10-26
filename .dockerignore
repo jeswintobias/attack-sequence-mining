@@ -1,0 +1,11 @@
+**/__pycache__/
+**/*.pyc
+frontend/node_modules/
+frontend/dist/
+data/ait_ads/
+data/cptc_2018/
+data/processed/
+data/sightings_v2_public.csv
+Researach Papers/
+.git/
+notebooks/

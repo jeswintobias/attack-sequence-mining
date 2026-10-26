@@ -534,3 +534,358 @@ The macro-recall claim is worth isolating because it was the strongest numeric
 prediction. The gain exists but is +0.012, not +0.11. The earlier appearance of a
 large gain came from comparing a single favourable fold against a 5-fold mean,
 the same error corrected in section 6.
+
+---
+
+## 11. AIT-ADS feasibility: why Phases 1-2 of the roadmap cannot be completed
+
+Reproduce with:
+
+```bash
+python src/eval/ait_feasibility.py     # scans all 2.7 GB; writes results/ait/
+```
+
+AIT-ADS was named in the project roadmap for Phases 1-2 ("download AIT-ADS,
+extract alert structures, build temporal host-level attack action graphs") and
+Phase 5 ("evaluate on AIT-ADS 8 scenarios"). It was also the only remaining
+candidate for testing whether reporting order is execution order, because unlike
+`sightings_v2` its alerts carry real microsecond timestamps. The full dataset was
+analysed to settle this.
+
+### What the dataset contains
+
+Two detectors, 2.7 GB:
+
+| Source | Volume | ATT&CK content |
+| :--- | ---: | :--- |
+| Wazuh (signature-based) | 2,600,263 alerts | 403,026 carry a `rule.mitre` block (15.5%) |
+| AMiner (unsupervised anomaly detection) | 55,558 events | **zero** MITRE references |
+
+The alert total matches the 2.6-million figure in Landauer et al. exactly, which
+confirms the parse. AMiner's output is `NewMatchPathValueDetector`,
+`CharsetDetector`, `EntropyDetector` and similar: it flags novel log lines with
+no technique semantics, so it cannot contribute to technique prediction at all.
+
+Ground truth is `labels.csv`: 79 rows, 8 scenarios of about 10 phases each,
+labelled with tool and action names (`dirb`, `wpscan`, `dnsteal`,
+`network_scans`, `privilege_escalation`) rather than ATT&CK techniques.
+
+### The binding constraint: 8 techniques, not 403,026 alerts
+
+Across all 2.6 million alerts the Wazuh rules reference only **8 distinct
+ATT&CK techniques**, and the same 8 in every scenario:
+
+`T1021, T1055, T1078, T1083, T1110, T1190, T1548, T1595`
+
+Overlap with the 109-technique vocabulary the models were trained on is **6**
+(`T1110` and `T1190` are AIT-only). So 403,026 tagged alerts collapse to about
+50,000 redundant alerts per technique — which is precisely the alert-reduction
+problem AIT was built to study, and precisely not sequence diversity.
+
+### Attributing alerts to phases works, and still yields almost nothing
+
+Tagged alerts were matched to the labelled attack windows by timestamp, then
+reduced to one first-occurrence technique sequence per scenario:
+
+| Scenario | Tagged alerts | In attack window | Phases covered | Sequence length |
+| :--- | ---: | ---: | :--- | ---: |
+| fox | 58,605 | 31,248 (53.3%) | 7/10 | 8 |
+| harrison | 63,117 | 32,744 (51.9%) | 9/10 | 8 |
+| russellmitchell | 15,058 | 953 (6.3%) | 5/10 | 7 |
+| santos | 30,194 | 1,543 (5.1%) | 9/10 | 8 |
+| shaw | 28,694 | 741 (2.6%) | 8/10 | 7 |
+| wardbeck | 33,015 | 813 (2.5%) | 8/10 | 8 |
+| wheeler | 77,387 | 31,800 (41.1%) | 7/9 | 8 |
+| wilson | 98,462 | 33,460 (34.0%) | 8/10 | 8 |
+
+The in-window share varies from 2.5% to 53.3%, which is itself a warning: most
+ATT&CK-tagged alerts fall *outside* the labelled attack windows and are
+therefore background noise rather than attack actions.
+
+The resulting sequences are nearly identical, because they are the same red-team
+script executed eight times:
+
+```
+fox              T1078 T1110 T1021 T1595 T1190 T1055 T1083 T1548
+harrison         T1078 T1021 T1190 T1595 T1055 T1083 T1110 T1548
+russellmitchell  T1021 T1595 T1055 T1083 T1190 T1078 T1548
+santos           T1078 T1110 T1021 T1595 T1055 T1083 T1190 T1548
+shaw             T1078 T1021 T1190 T1595 T1055 T1083 T1548
+wardbeck         T1078 T1021 T1595 T1190 T1055 T1110 T1083 T1548
+wheeler          T1078 T1021 T1595 T1055 T1083 T1190 T1110 T1548
+wilson           T1078 T1110 T1021 T1595 T1055 T1083 T1190 T1548
+```
+
+Seven of the eight are technically distinct, but every one begins with `T1078`
+(bar one) and every single one ends with `T1548`. The phase orderings confirm
+one script: five distinct orders exist, and they differ only by the
+`dirb`/`wpscan` swap and by whether `service_stop -> dnsteal` appears at the
+start or the end, which is an artifact of where the capture window cut the
+recording rather than different attacker behaviour.
+
+### Verdict
+
+| | sightings_v2 | AIT-ADS |
+| :--- | ---: | ---: |
+| Prefix/next training examples | **11,105** | **46** |
+| Unique multi-stage sequences | 2,721 | 8 (7 distinct) |
+| Distinct techniques | 109 | 8 |
+| Effective distinct attack paths | thousands | **1** |
+| Real timestamps | no | yes |
+
+**AIT-ADS cannot be used for this task**, and the reason is not effort or
+parsing difficulty — the parse works and is reproducible above. It is that 2.6
+million alerts contain one attack script observed eight times.
+
+### What went wrong, precisely
+
+This was a planning error at the roadmap stage, not an execution failure.
+`docs/research_report_attack_sequence_mining.md` line 43 states correctly that
+Landauer et al. "formulate mathematical metrics for **detector evaluation**" —
+robustness $s_{rob}$ and detection power $s_{det}$. AIT-ADS is a *detector
+benchmark*, answering "did the detector fire inside the attack window?". That is
+why it ships 2.6M alerts and precise windows, and why the AECID framework
+quoted alongside it reports a 98.93% *alert reduction* rate.
+
+Phases 1-2 then planned to use the same dataset to build attack action graphs
+and predict $T_{k+1}$. The two tasks need opposite properties:
+
+| Requirement | Detector evaluation | Next-step prediction |
+| :--- | :--- | :--- |
+| Many alerts inside known windows | essential | irrelevant |
+| Many *independent* attack campaigns | irrelevant | essential |
+| Varied technique orderings | irrelevant | essential |
+| Broad ATT&CK labelling | partial | essential |
+
+Alert *volume* was mistaken for sequence *diversity*. For next-step prediction
+the quantity that matters is the number of independent attack paths: 8 here
+against 2,721 in the sightings data.
+
+The useful conclusion for the write-up is uncomfortable but defensible:
+**`sightings_v2`, despite having no execution timestamps, is the better dataset
+for this problem.** AIT has real time and no diversity; sightings has real
+diversity and no time. Neither provides both, so the question of whether
+reported order equals execution order cannot be settled with either dataset, and
+should be stated as a limitation rather than deferred to future work on AIT.
+
+### What this does not affect
+
+Nothing in Stages A-D depended on AIT-ADS. The order-signal permutation test
+(DEC-05, DEC-06), the split (DEC-02), the PrefixSpan implementation and its
+verification (DEC-08, DEC-09), the negative-rule mining (DEC-12) and every
+predictor result stand unchanged. What is retired is Phases 1-2, 4 and 5 of the
+roadmap, which should be rewritten rather than attempted.
+
+---
+
+## 12. CPTC-2018: a second dataset, with real timestamps
+
+Reproduce with:
+
+```bash
+python src/core/cptc_loader.py      # parse alerts -> traces -> prefix/next
+python src/eval/cptc_evaluate.py    # 5-fold evaluation
+```
+
+CPTC-2018 is the only public dataset found that has both properties
+`sightings_v2` and AIT-ADS each lack: **real microsecond timestamps** and **many
+independent attack campaigns** (six competition teams attacking the same
+infrastructure, so the attack paths are genuinely independent rather than one
+script repeated). Data: six gzipped Suricata exports, 41.8 MB, from the
+MIT-licensed `tudelft-cda-lab/SAGE` repository.
+
+### Parse validation
+
+The loader reads **331,554 alerts**, exactly matching the figure reported in
+arXiv 2408.09888 for this dataset, which confirms the parse. All 225 distinct
+signatures map to SAGE's `MicroAttackStage` taxonomy (23 stages observed); the
+mapping tables are read **statically with `ast`** so the third-party module is
+treated as data and never imported or executed.
+
+### Sequence construction
+
+Traces are `(attacker host -> victim host)` pairs, which is SAGE's definition and
+the reason the trace count is large. Alerts are aggregated into episodes on a
+150-second window, then cut wherever the attack-stage **severity tier** drops,
+reproducing SAGE's marker for a new attack attempt (it keys on the digit count
+of the enum value, so recon stages are tier 1, exploitation tier 2, impact
+tier 3).
+
+| | Ours (stage only) | Ours (stage\|service) | Paper |
+| :--- | ---: | ---: | ---: |
+| Traces | 640 | 786 | 555 |
+| Distinct traces | 400 | 510 | — |
+| Mean length | 24.66 | 31.15 | 5.78 |
+| Median length | 8 | 8 | — |
+| Symbols | 20 | 59 | 148 |
+| Prefix/next examples | 14,504 | 22,914 | — |
+
+Trace counts are close, but mean lengths are much longer because the fixed-window
+episode rule is a simplification of SAGE's frequency-peak segmentation. **This is
+a comparable task, not a reproduction.**
+
+### A structural difference from the sightings data
+
+**88-93% of CPTC targets repeat a symbol already in the prefix.** In
+`sightings_v2` that figure is 0% by construction, because first-occurrence
+deduplication (DEC-03) makes it impossible. Prefix masking (DEC-17) is therefore
+disabled for this dataset: revisiting an attack stage later in a campaign is real
+behaviour here, not an artifact. This also exposes DEC-03 as a consequential
+modelling assumption rather than a neutral cleaning step.
+
+### Results (5-fold, grouped by trace, sequence-balanced)
+
+| Model | top-1 | top-3 | top-5 | MRR | MRR sd |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| **stage only, 20 symbols** | | | | | |
+| B1 Majority | 0.0537 | 0.4643 | 0.6026 | 0.3098 | 0.0098 |
+| B3 Markov-1 | 0.5255 | 0.8453 | 0.9226 | 0.6948 | 0.0205 |
+| B4 Markov-2 | 0.6577 | 0.9078 | 0.9497 | 0.7892 | 0.0022 |
+| LightGBM softprob | **0.7385** | **0.9158** | **0.9598** | **0.8353** | 0.0087 |
+| **stage\|service, 59 symbols** | | | | | |
+| B1 Majority | 0.0415 | 0.2092 | 0.3459 | 0.1970 | 0.0115 |
+| B3 Markov-1 | 0.4249 | 0.7395 | 0.8612 | 0.6020 | 0.0121 |
+| B4 Markov-2 | 0.5322 | 0.8212 | 0.8995 | 0.6897 | 0.0176 |
+| LightGBM softprob | **0.6545** | **0.8532** | **0.9109** | **0.7660** | 0.0097 |
+
+Paired per-trace MRR, stage|service, bootstrap over traces:
+
+| Comparison | mean diff | 95% CI | significant |
+| :--- | ---: | :--- | :--- |
+| LightGBM − Markov-2 | +0.0763 | [+0.0666, +0.0865] | yes |
+| LightGBM − Markov-1 | +0.1640 | [+0.1516, +0.1780] | yes |
+| LightGBM − Majority | +0.5690 | [+0.5520, +0.5874] | yes |
+
+(MEASURED — `results/cptc/cptc_summary.csv`, `results/cptc/cptc_paired.csv`)
+
+### The task is not degenerate
+
+Because 88% of targets repeat an earlier symbol, trivial rules were tested
+before any result was believed:
+
+| Trivial baseline (stage\|service) | top-1 | top-3 | MRR |
+| :--- | ---: | ---: | ---: |
+| Predict the last symbol | 0.0820 | 0.2070 | 0.2106 |
+| Rank by prefix frequency | 0.1103 | 0.4077 | 0.3143 |
+| Rank by recency-weighted prefix counts | 0.1001 | 0.4030 | 0.3072 |
+
+All land at 0.21-0.31 MRR against the learned models' 0.69-0.77. Knowing *which*
+previously-seen symbol comes next requires real modelling, so the high absolute
+scores are not an artifact of repetition.
+
+### What can and cannot be claimed
+
+**Not a win over the published method.** Our top-3 of 0.8532 exceeds the paper's
+0.6727, but on an easier variant: 59 symbols against their 148, mean sequence
+length 31 against 5.78, and all prefixes of length >= 2 rather than forecasting
+the 6th symbol from five. Fewer classes and longer context both inflate the
+score. No head-to-head claim is supported.
+
+**What is supported:**
+
+1. **The method transfers.** The same predictors, unchanged, work on a different
+   dataset with a different label space.
+2. **The model ordering reproduces exactly.** Majority < Markov-1 < Markov-2 <
+   LightGBM on both datasets, with LightGBM significantly ahead of Markov-2 in
+   both (+0.0763 here, +0.0898 on sightings).
+3. **Nothing about ordering semantics.** See section 13: an initial reading of
+   the 0.766-against-0.539 gap as evidence that execution order carries more
+   signal than reported order was **withdrawn** after measuring both datasets'
+   intrinsic difficulty. CPTC is simply an easier prediction problem.
+
+### Retracted claim
+
+This section originally argued that the higher CPTC scores were evidence that
+reported order carries less predictive signal than execution order -- the open
+question from DEC-05. That inference does not survive measurement and is
+withdrawn; section 13 has the numbers. The performance gap is explained at least
+as well, and probably better, by CPTC having roughly 2.3x lower conditional
+entropy, a three times more skewed label distribution, and far fewer rare
+classes. The two datasets differ on too many dimensions for the gap to be
+attributed to ordering.
+
+
+---
+
+## 13. Structural comparison of the two datasets
+
+Reproduce with:
+
+```bash
+python src/eval/dataset_comparison.py
+```
+
+The same models score 0.539 sequence MRR on sightings and 0.766 on CPTC. Before
+reading that as a statement about reported versus execution order, the competing
+explanation had to be tested: that CPTC is simply a less ambiguous task.
+
+| Property | sightings_v2 | CPTC stage only | CPTC stage\|service |
+| :--- | ---: | ---: | ---: |
+| Sequences | 2,178 | 640 | 786 |
+| Prefix/next examples | 11,105 | 14,504 | 22,914 |
+| Label classes | 101 | 20 | 59 |
+| Mean / median length | 7.10 / 7 | 24.66 / 8 | 31.15 / 8 |
+| Max length | 18 | 240 | 691 |
+| Most common label's share | **9.6%** | 45.2% | 28.6% |
+| Top-10 labels' share | **67.9%** | 97.9% | 88.9% |
+| Label entropy (bits) | 4.573 | 2.305 | 3.608 |
+| Classes with < 5 examples | **50 of 101** | 2 of 20 | 15 of 59 |
+| Target repeats the prefix | **0.0%** | 92.7% | 88.2% |
+| Mean successors, last-1 context | **12.43** | 5.80 | 8.56 |
+| Mean successors, last-2 context | **6.02** | 3.84 | 4.85 |
+| **Conditional entropy, last-1 (bits)** | **3.638** | 0.880 | 1.579 |
+| **Conditional entropy, last-2 (bits)** | **2.667** | 0.652 | 1.179 |
+
+(MEASURED — `results/comparison/dataset_structural_comparison.csv`)
+
+### The gap is task difficulty, not ordering semantics
+
+Conditional entropy is the decisive line: it is the average uncertainty left
+about the next symbol once the context is known, and it measures difficulty
+independently of class count. At last-2 context, sightings carries **2.667 bits**
+of residual uncertainty against CPTC's **1.179** — the sightings task is about
+**2.3x harder in information terms** before any model is involved.
+
+Three other properties point the same way:
+
+- **Label skew.** One CPTC stage-only label accounts for 45.2% of all targets,
+  and ten labels cover 97.9%. In sightings the leader holds 9.6% and the top ten
+  cover 67.9%. A concentrated target distribution is far easier to rank.
+- **Rare classes.** 50 of 101 sightings classes have fewer than 5 examples,
+  against 2 of 20 for CPTC stage-only.
+- **Branching.** 6.02 distinct successors per reused last-2 context in sightings
+  against 3.84-4.85 in CPTC.
+
+So the ordering hypothesis is **not** supported by this comparison, and the
+earlier reading in section 12 is withdrawn. The honest position is that the two
+datasets differ on label ontology, skew, sequence length, repeat structure and
+intrinsic entropy simultaneously, so no single factor can be isolated. The
+question DEC-05 raised -- whether reported order equals execution order --
+remains open, and would need a dataset where *the same incidents* are available
+in both reported and timestamped form. No such dataset was found.
+
+### Mismatches, enumerated
+
+| # | Dimension | sightings_v2 | CPTC-2018 |
+| ---: | :--- | :--- | :--- |
+| 1 | Label ontology | 101 ATT&CK techniques | 20-59 attack-stage \| service symbols |
+| 2 | Vocabulary overlap | — | **none**; the ontologies are disjoint |
+| 3 | Ordering semantics | analyst reporting order | wall-clock execution order |
+| 4 | Repeats allowed | no (DEC-03 forbids) | yes, and typical (88-93%) |
+| 5 | Unit of a sequence | one incident report | one (attacker host → victim host) pair |
+| 6 | Provenance | many organisations' real incidents | 6 teams, one competition environment |
+| 7 | Duplicate weighting | `dup_count` up to 449 | none; every trace counts once |
+| 8 | Intrinsic difficulty | 2.667 bits at last-2 | 1.179 bits at last-2 |
+| 9 | Length distribution | tight (max 18) | long tail (max 691) |
+| 10 | Rare-class burden | 50 of 101 classes sparse | 2-15 classes sparse |
+| 11 | Timestamps | one date per incident | microsecond per alert |
+| 12 | Action granularity | technique | stage crossed with service |
+
+### What the comparison does support
+
+Sightings is the **harder and more diverse** problem: four times the label
+classes, 2.3x the conditional entropy, far broader technique coverage, and real
+incidents from many organisations. CPTC is the **operationally realistic** one:
+genuine timestamps, alert-stream input, and service-level labels that name what
+is being attacked. They are complementary rather than competing, and the
+difference in scores reflects their difficulty, not the quality of the models.
