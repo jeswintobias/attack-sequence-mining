@@ -142,7 +142,7 @@ Vite + React + TypeScript + Tailwind + shadcn/ui. Header tab switching between
 **Predict** and **Explore**. Design tokens, light and dark themes, typography
 scale, and explicit loading, empty and error states.
 
-### Stage 4 — Prediction experience
+### Stage 4 — Prediction experience  **[DONE 2026-10-26]**
 
 Where most of the effort belongs.
 
@@ -159,7 +159,7 @@ Where most of the effort belongs.
 - A worked example preloaded on first visit, so the application demonstrates
   itself without any typing.
 
-### Stage 5 — EDA tab and shipping
+### Stage 5 — EDA tab and shipping  **[DONE 2026-10-26]**
 
 - Chart gallery from the 34 existing CSV/PNG pairs in `results/eda/figures/`,
   rendered interactively where it pays: transition heatmap, length distribution,
@@ -391,3 +391,149 @@ label because two status steps sit below 3:1 on light by design.
 Both themes render correctly, the Explore tab lists all 18 EDA charts with the
 right kind classification (3 heatmaps, 5 series, 10 tables), and the keyboard
 tab pattern behaves. The Forecast tab is an empty state until Stage 4.
+
+
+---
+
+## 9. Stage 4 outcome (2026-10-26)
+
+The Forecast tab is complete. Typecheck clean, production bundle 79 kB gzipped.
+
+### The organising decision: never show the model's number alone
+
+Stage 1 measured that temperature scaling corrects calibration *on average*
+(expected calibration error 0.0808 to 0.0167) but does not repair individual
+sparse contexts. The interface is built around that finding rather than in spite
+of it. Each candidate row places the model estimate **directly beside the
+observed transition rate**, so a disagreement is visible rather than hidden.
+
+The worked example shows exactly why this matters. For `T1078 -> T1059` the top
+candidate `T1132` reads:
+
+```
+1  T1132  Data Encoding  [Command and Control]
+   ████████████████████████  82%   observed 8.8%
+
+   T1078 → T1059 → T1132   seen 0 of 1 times    (0.0%)
+   T1059 → T1132           seen 205 of 2,333    (8.8%)
+```
+
+An analyst can see at a glance that the two-technique context was observed
+**once**, that the model is extrapolating, and that the one-technique evidence
+says 8.8%. The Confidence panel reinforces it: "Only the last technique has
+usable support; the two-technique context is too thin."
+
+### What was built
+
+- **Technique picker** — an ARIA combobox searching **names, identifiers and
+  tactics**, so "PowerShell" finds `T1059`. Arrow keys move the active option,
+  Enter commits, Escape closes, Backspace on an empty query removes the last
+  chip. With no query it offers the techniques training actually supports, ranked
+  by frequency. Chips are numbered because the model consumes an ordered prefix,
+  not a set.
+- **Ranked candidates** — rank is the most prominent element, since rank is what
+  the evaluation measured. Probability bars are scaled against the top candidate
+  so the ranking stays readable when the distribution is flat. Each row expands
+  to show order-1 and order-2 transition counts and any mined PrefixSpan rules
+  that fired. A footer states the shortlist's coverage and repeats that measured
+  top-5 accuracy is 0.756.
+- **Kill-chain stepper** — fourteen tactics in order, with two deliberately
+  separate channels: a filled node means the prefix touched that tactic, and a
+  bar carries the share of predicted mass. Observation and prediction are
+  different claims and are not merged into one ramp. Labels are abbreviated with
+  full names on hover, and the whole figure carries a sentence-form `aria-label`.
+- **Confidence panel** — support counts for both contexts, the back-off
+  explanation in plain language, the excluded already-observed techniques with
+  the reason, and a warning when the single-technique fallback is in use.
+- **Possible orderings** — beam-search results, labelled exploratory, stating
+  whether the search was exhaustive.
+- **Caveats** — the model card's seven caveats, collapsed but one click away.
+- **Worked example preloaded** (`T1078`, `T1059`) so the application
+  demonstrates itself without anyone typing an identifier from memory.
+
+### One layout defect found and fixed
+
+The kill chain was first placed in the narrow left column of the two-column
+grid, where fourteen steps need about 812 px and had roughly 470 px. It clipped
+at twelve tactics and scrolled horizontally — unacceptable for the signature
+visual. It now spans the full row below the grid. Verified in the browser:
+`scrollWidth` 1062 equals `clientWidth` 1062, so all fourteen steps fit without
+scrolling at desktop width, and the container still scrolls gracefully on narrow
+viewports.
+
+### Not built
+
+The Cytoscape path graph was third priority within this stage and is deferred.
+The ranked list and the kill-chain stepper carry the value; the graph would add
+visual interest rather than information, and the stage is complete without it.
+
+
+---
+
+## 10. Stage 5 outcome (2026-10-26)
+
+The Explore tab is complete and the application ships. Typecheck clean,
+production bundle 84 kB gzipped.
+
+### Charts are hand-built, not a library
+
+ECharts was planned and dropped. The mark specifications this project follows
+are precise — bars capped at 24px with a 4px rounded data-end square at the
+baseline, 2px lines, markers of at least 8px carrying a 2px surface ring, a 2px
+surface gap between touching fills, hairline recessive gridlines — and meeting
+them exactly through a library's theming layer is more work than drawing the
+SVG. Hand-building also keeps every colour a design token, so light and dark
+stay in step with no second palette, and it avoids roughly 1 MB of dependency
+for three chart types.
+
+Four components in `src/components/charts/`: horizontal bars, a line chart with
+a snapping crosshair and optional log scale, a sequential heatmap, and a data
+table.
+
+### The palette constraint, honoured
+
+Stage 3 recorded that three categorical slots sit below 3:1 on the light
+surface. Rather than discharge that with extra relief, **series are restricted
+to slots 1 and 2** (blue and orange), both of which clear contrast in both
+modes. Any chart needing more than two series folds the remainder into the table
+view. The heatmap uses the single sequential blue ramp, light to dark, with the
+lightest step allowed to recede toward the surface because near-zero should look
+like nothing.
+
+Every chart has a **table view behind a toggle**, so no value is reachable only
+by hovering, and the relief obligation is discharged structurally.
+
+### Form chosen per chart, not inferred
+
+A registry maps each chart id to a form chosen from the data's job: magnitude
+comparisons become bars, the long-tailed rank-frequency distribution becomes a
+log-scaled line, pairwise matrices become heatmaps, and anything whose job is
+lookup stays a table. Charts absent from the registry render as tables, which is
+a correct default rather than a failure.
+
+### The evaluation is part of the product
+
+Explore splits into **The dataset** and **The evaluation**. The second renders
+the model card: headline metrics, the multi-modality explanation for why top-1
+is low, macro recall, fold spread, the calibration before and after temperature
+scaling, and **the four documented negative results** with their decision
+references. An evaluation that lists only what worked invites the question of
+what was left out, so what did not work is shown too.
+
+### Shipping
+
+- `README.md` covering the quick start, the architecture, how to read the
+  numbers, the tests and the research behind it.
+- `Dockerfile`: a two-stage build, Node for the frontend and Python 3.12 slim
+  for the runtime, with `libgomp1` for LightGBM and a health check. Artifacts
+  are copied rather than built in-image, because building them requires training
+  data that is not redistributed — and the host build gates on reproducing the
+  documented metric.
+- `.dockerignore` excluding the datasets, caches and build outputs.
+
+### Verified in the browser
+
+Both sections render, the chart filter works, the transition heatmap draws a
+complete 20x20 matrix with its sequential legend, the first bar chart shows
+757K / 175K / 108K / 7.8K with compact axis labels, and all four negative
+results display with their decision references.
