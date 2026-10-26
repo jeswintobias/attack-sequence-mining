@@ -1,0 +1,21 @@
+,sightings_v2 (reported order),CPTC-2018 stage only,CPTC-2018 stage|service
+sequences,2178.0,640.0,786.0
+examples,11105.0,14504.0,22914.0
+label_classes,101.0,20.0,59.0
+mean_length,7.1,24.66,31.15
+median_length,7.0,8.0,8.0
+max_length,18.0,240.0,691.0
+top1_label_share,0.0956,0.4515,0.2855
+top10_label_share,0.679,0.9792,0.8894
+label_entropy_bits,4.573,2.305,3.608
+label_entropy_normalised,0.687,0.533,0.613
+classes_under_5_examples,50.0,2.0,15.0
+target_repeats_prefix,0.0,0.927,0.8818
+last1_contexts,98.0,18.0,53.0
+last1_reuse,0.714,0.833,0.849
+last1_mean_successors,12.43,5.8,8.56
+last1_cond_entropy_bits,3.638,0.88,1.579
+last2_contexts,852.0,67.0,319.0
+last2_reuse,0.624,0.731,0.668
+last2_mean_successors,6.02,3.84,4.85
+last2_cond_entropy_bits,2.667,0.652,1.179
