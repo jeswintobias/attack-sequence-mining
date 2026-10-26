@@ -1,0 +1,9 @@
+dataset,model,seq_top_1,seq_top_3,seq_top_5,seq_mrr
+stage only,B1_Majority,0.0537,0.4643,0.6026,0.3098
+stage only,B3_Markov1,0.5255,0.8453,0.9226,0.6948
+stage only,B4_Markov2,0.6577,0.9078,0.9497,0.7892
+stage only,LightGBM_softprob,0.7385,0.9158,0.9598,0.8353
+stage|service,B1_Majority,0.0415,0.2092,0.3459,0.197
+stage|service,B3_Markov1,0.4249,0.7395,0.8612,0.602
+stage|service,B4_Markov2,0.5322,0.8212,0.8995,0.6897
+stage|service,LightGBM_softprob,0.6545,0.8532,0.9109,0.766

@@ -29,3 +29,6 @@ data/sightings_v2_public.csv
 
 # Research paper reference PDFs (contains 120MB PDF exceeding GitHub limits)
 Researach Papers/
+
+# CPTC-2018 Suricata alerts (external, 42MB; fetch from tudelft-cda-lab/SAGE)
+data/cptc_2018/
